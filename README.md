@@ -1,104 +1,280 @@
-# Site de Mariage Estelle & Matthieu 💒
+# 🎉 Site de Mariage - Estelle & Matthieu
 
-Un site web moderne et élégant pour célébrer le mariage d'Estelle et Matthieu, développé avec React et Vite.
+Site de mariage bilingue élégant et moderne, construit avec React et Vite, optimisé pour le déploiement Docker sur Proxmox.
 
-## ✨ Fonctionnalités
+## 🚀 Déploiement Rapide avec Portainer
 
-- 🌍 **Multilingue** - Support complet français/anglais
-- 📱 **Responsive** - Optimisé pour tous les appareils
-- 🎨 **Design moderne** - Interface utilisateur élégante avec Tailwind CSS
-- 📝 **RSVP interactif** - Formulaire de confirmation de présence
-- 💭 **Livre d'or** - Partage de souvenirs et messages
-- 📅 **Planning détaillé** - Programme complet de la journée
-- 🎁 **Liste de mariage** - Informations sur les cadeaux
-- 🗺️ **Guide pratique** - Informations sur le lieu et l'hébergement
+### 📦 Prêt à déployer
 
-## 🛠️ Technologies utilisées
+L'application est déjà **construite et empaquetée** dans une image Docker optimisée (50 MB). Pas besoin de compiler !
 
-- **React 18** - Bibliothèque UI moderne
-- **Vite** - Build tool rapide et optimisé
-- **Tailwind CSS** - Framework CSS utilitaire
-- **Radix UI** - Composants UI accessibles
-- **Framer Motion** - Animations fluides
-- **Lucide React** - Icônes modernes
+**Fichiers essentiels :**
+- ✅ `estelle-matthieu-wedding.tar` - Image Docker prête
+- ✅ `docker-compose.portainer.yml` - Configuration Portainer
+- ✅ Ce README - Guide complet
 
-## 🚀 Installation et développement
-
-### Prérequis
-
-- Node.js (version 18 ou supérieure)
-- npm ou yarn
-
-### Installation
+### ⚡ Déploiement en 3 étapes
 
 ```bash
-# Cloner le repository
-git clone https://github.com/votre-username/matthieu-estelle.git
+# 1. Transférer l'image sur votre serveur Proxmox
+scp estelle-matthieu-wedding.tar user@your-server-ip:/home/user/
 
-# Naviguer dans le dossier
-cd matthieu-estelle
+# 2. Charger l'image Docker
+ssh user@your-server-ip
+docker load -i estelle-matthieu-wedding.tar
 
-# Installer les dépendances
+# 3. Déployer via Portainer (Interface Web)
+# ➜ Accéder à http://your-server-ip:9000
+# ➜ Stacks → Add Stack → Coller la config → Deploy
+```
+
+## 🎯 Fonctionnalités
+
+- ✅ **Bilingue** - Français/Anglais avec commutation instantanée
+- ✅ **RSVP interactif** - Formulaire avec gestion des accompagnants
+- ✅ **Livre d'or** - Messages des invités
+- ✅ **Informations complètes** - Programme, lieu, transport, hébergement
+- ✅ **Responsive** - Optimisé mobile/tablette/desktop
+- ✅ **Production-ready** - Nginx + optimisations performances
+
+## 🐳 Configuration Docker
+
+### Image multi-stage optimisée
+```dockerfile
+# Build stage (Node.js) → Production stage (Nginx Alpine)
+# Taille finale : ~48 MB
+```
+
+### Configuration Portainer
+```yaml
+version: '3.8'
+services:
+  wedding-app:
+    image: estelle-matthieu-wedding:latest
+    container_name: estelle-matthieu-wedding
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - wedding-network
+
+networks:
+  wedding-network:
+    driver: bridge
+```
+
+## 🔧 Déploiement via Portainer
+
+### Accès à Portainer
+1. **Interface** : `http://your-server-ip:9000`
+2. **Stacks** → **Add Stack**
+3. **Nom** : `wedding-app`
+4. **Configuration** : Copier le contenu de `docker-compose.portainer.yml`
+5. **Deploy** : Un clic !
+
+### Gestion via Portainer
+- 🖱️ **Interface graphique** intuitive
+- 📊 **Monitoring** en temps réel
+- 📝 **Logs** centralisés
+- 🔄 **Start/Stop/Restart** facile
+- ⚙️ **Configuration** modifiable
+- 📈 **Métriques** CPU/RAM
+## 🛠️ Développement Local
+
+Si vous voulez modifier l'application :
+
+```bash
+# Installation
 npm install
-```
 
-### Développement
-
-```bash
-# Lancer le serveur de développement
+# Développement
 npm run dev
-```
+# ➜ http://localhost:5173
 
-Le site sera accessible sur `http://localhost:5173`
-
-### Build de production
-
-```bash
-# Construire pour la production
+# Construction
 npm run build
 
-# Prévisualiser le build
-npm run preview
+# Test Docker local
+docker build -t estelle-matthieu-wedding .
+docker run -d -p 8080:80 estelle-matthieu-wedding
+# ➜ http://localhost:8080
 ```
 
-## 📁 Structure du projet
+## 📦 Mise à jour
+
+```bash
+# 1. Modifier le code
+# 2. Reconstruire l'image
+docker build -t estelle-matthieu-wedding .
+docker save -o estelle-matthieu-wedding-v2.tar estelle-matthieu-wedding
+
+# 3. Transférer et charger
+scp estelle-matthieu-wedding-v2.tar user@server:/home/user/
+ssh user@server "docker load -i estelle-matthieu-wedding-v2.tar"
+
+# 4. Redéployer via Portainer
+# Stacks → wedding-app → Update → Re-deploy
+```
+
+### Commandes utiles
+```bash
+# Vérifier le statut
+docker ps | grep wedding
+
+# Voir les logs
+docker logs estelle-matthieu-wedding
+
+# Statistiques en temps réel
+docker stats estelle-matthieu-wedding
+
+# Test de connectivité
+curl -I http://your-server-ip
+```
+
+## 🆘 Dépannage
+
+### Le conteneur ne démarre pas
+1. **Portainer** → **Containers** → **Logs**
+2. Vérifier les ports : `netstat -tulpn | grep :80`
+3. Redémarrer : **Restart** dans Portainer
+
+### Application inaccessible
+1. **Firewall** : `sudo ufw allow 80/tcp`
+2. **Port mapping** : Vérifier 80:80 dans la config
+3. **Réseau** : `docker network ls`
+
+### Performance lente
+1. **Ressources** : Augmenter RAM/CPU du LXC
+2. **Optimisation** : L'image est déjà optimisée (Nginx + gzip)
+3. **Cache** : Headers de cache configurés
+
+## ⚙️ Configuration Serveur Proxmox
+
+### LXC Recommandé
+- **OS** : Ubuntu 22.04 LTS
+- **CPU** : 2 cores minimum
+- **RAM** : 2 GB minimum
+- **Stockage** : 20 GB
+- **Réseau** : IP statique recommandée
+
+### Installation Docker + Portainer
+```bash
+# Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker $USER
+
+# Portainer
+docker volume create portainer_data
+docker run -d -p 9000:9000 --name portainer --restart=always \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v portainer_data:/data portainer/portainer-ce:latest
+```
+
+## 🔧 Technologies
+
+- **Frontend** : React 18 + Vite
+- **Styling** : Tailwind CSS + Radix UI
+- **Production** : Nginx Alpine
+- **Container** : Docker multi-stage
+- **Orchestration** : Docker Compose + Portainer
+
+## 📁 Structure du Projet
 
 ```
-src/
-├── components/          # Composants React
-│   ├── ui/             # Composants UI réutilisables
-│   ├── memories/       # Composants du livre d'or
-│   └── rsvp/          # Composants RSVP
-├── contexts/           # Contextes React (gestion des langues)
-├── lib/               # Utilitaires et traductions
-│   └── translations/  # Fichiers de traduction
-└── ...
+├── src/
+│   ├── components/     # Composants React
+│   │   ├── ui/        # Composants UI réutilisables
+│   │   ├── rsvp/      # Formulaire RSVP
+│   │   └── memories/  # Livre d'or
+│   ├── contexts/      # Contextes React
+│   ├── lib/          # Utilitaires et traductions
+│   └── main.jsx      # Point d'entrée
+├── Dockerfile        # Image multi-stage optimisée
+├── nginx.conf        # Configuration Nginx
+└── docker-compose.portainer.yml  # Config Portainer
 ```
 
-## 🌐 Internationalisation
+## 🎮 Commandes Rapides
 
-Le site supporte le français et l'anglais. Les traductions sont organisées par sections dans `src/lib/translations/`.
+```bash
+# Construction locale
+npm run build
 
-## 🎨 Personnalisation
+# Test Docker
+docker build -t wedding . && docker run -p 8080:80 wedding
 
-Le thème et les couleurs peuvent être personnalisés dans `tailwind.config.js`. Les composants utilisent une approche modulaire pour faciliter les modifications.
+# Export pour serveur
+docker save -o wedding.tar estelle-matthieu-wedding
 
-## 📦 Déploiement
+# Déploiement serveur
+scp wedding.tar user@server: && ssh user@server "docker load -i wedding.tar"
+```
 
-Le projet est configuré pour être déployé facilement sur des plateformes comme :
-- Vercel
-- Netlify
-- GitHub Pages
-- Hostinger
+## 🔄 Sauvegarde et Restauration
 
-## 🤝 Contribution
+### Sauvegarde
+```bash
+# Sauvegarder l'image
+docker save estelle-matthieu-wedding > backup-wedding.tar
 
-Ce projet est privé et destiné à un usage personnel. Pour toute question ou suggestion, contactez les développeurs.
+# Sauvegarder la configuration
+cp docker-compose.portainer.yml backup/
+```
 
-## 📄 Licence
+### Restauration
+```bash
+# Restaurer l'image
+docker load < backup-wedding.tar
 
-Ce projet est sous licence privée - voir le fichier LICENSE pour plus de détails.
+# Redéployer via Portainer avec la configuration sauvegardée
+```
+
+## 🔐 Sécurité
+
+### Recommandations
+1. **Firewall** : Configurer ufw pour n'autoriser que les ports nécessaires
+2. **Mise à jour** : Maintenir le système et Docker à jour
+3. **Sauvegarde** : Sauvegarde automatique quotidienne
+4. **Monitoring** : Surveillance des logs pour activités suspectes
+
+### Configuration firewall
+```bash
+sudo ufw allow ssh
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 9000/tcp  # Portainer
+sudo ufw enable
+```
+
+## 📞 Support et Contact
+
+### En cas de problème
+1. **Logs** : Vérifier les logs dans Portainer
+2. **Statut** : Vérifier l'état des services Docker
+3. **Réseau** : Tester la connectivité réseau
+4. **Ressources** : Vérifier l'utilisation CPU/RAM
+
+### Ressources utiles
+- [Documentation Docker](https://docs.docker.com/)
+- [Documentation Portainer](https://docs.portainer.io/)
+- [Guide Proxmox LXC](https://pve.proxmox.com/wiki/Linux_Container)
 
 ---
 
-Fait avec ❤️ pour Estelle & Matthieu
+**🎉 Déploiement simplifié avec Portainer - Prêt en quelques clics !**
+
+*Développé avec ❤️ pour Estelle & Matthieu*
+
+---
+
+**🎉 Déploiement simplifié avec Portainer - Prêt en quelques clics !**
+
+*Développé avec ❤️ pour Estelle & Matthieu*

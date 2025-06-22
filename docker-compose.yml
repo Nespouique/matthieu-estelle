@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  wedding-app:
+    image: estelle-matthieu-wedding:latest
+    container_name: estelle-matthieu-wedding
+    restart: unless-stopped
+    ports:
+      - 80:80
+    environment:
+      - NODE_ENV=production

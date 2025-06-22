@@ -1,0 +1,35 @@
+# Fichiers et dossiers à ignorer lors de la construction Docker
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Fichiers de développement
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Fichiers de build locaux
+dist/
+build/
+
+# Fichiers de cache
+.cache/
+.vscode/
+.idea/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers Git
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Fichiers de configuration de développement
+vite.config.clean.js

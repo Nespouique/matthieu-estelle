@@ -10,6 +10,10 @@ lerna-debug.log*
 # Node modules
 node_modules/*
 
+# Docker images
+*.tar
+estelle-matthieu-wedding.tar
+
 # Build outputs
 dist
 dist-ssr
