@@ -107,6 +107,32 @@ docker run -d -p 8080:80 estelle-matthieu-wedding
 # ➜ http://localhost:8080
 ```
 
+## 📦 Construction et Publication de l'Image Docker
+
+### Prérequis
+- **Docker Desktop** : Lancer Docker Desktop en local
+
+### 🛠️ Processus de build et publication
+
+```bash
+# 1. Construction de l'image
+docker build -t nespouique/estelle-matthieu-wedding:latest .
+
+# 2. Ajouter un tag de version
+docker tag nespouique/estelle-matthieu-wedding:latest nespouique/estelle-matthieu-wedding:v2.2.0
+
+# 3. Publication sur Docker Hub
+docker push nespouique/estelle-matthieu-wedding:v2.2.0
+docker push nespouique/estelle-matthieu-wedding:latest
+```
+
+### 📋 Étapes détaillées
+
+1. **Lancer Docker Desktop** - S'assurer que Docker est démarré
+2. **Build** - Construire l'image avec le tag latest
+3. **Tag** - Ajouter un tag de version spécifique (ex: v2.2.0)
+4. **Push** - Publier les deux versions (latest et versionnée) sur Docker Hub
+
 ## 📦 Mise à jour
 
 ```bash

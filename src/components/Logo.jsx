@@ -9,7 +9,7 @@ const Logo = () => {
   return (
     <a href="#hero" className="group">
       <img 
-        src="/images/Logo.svg" 
+        src="/images/Logo.png" 
         alt={`${t.estelle} & ${t.matthieu} Logo`}
         className="h-14 sm:h-18 transition-transform duration-300 group-hover:scale-110"
       />
