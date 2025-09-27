@@ -1,28 +1,31 @@
 export const scheduleEn = {
-  scheduleTitle: "Wedding Day Schedule",
-  arrival: {
-    title: "Guests Arrival",
-    description: "Welcome to the Domaine de Chaalis. Please make yourselves comfortable.",
+  scheduleTitle: "Schedule",
+  civilMarriage: {
+    date: "Thursday July 23, 2026",
+    title: "Civil Marriage",
+    location: "Houilles",
+    times: [
+      "2:45 PM - Wedding at the town hall",
+      "4:30 PM - Welcome cocktail at Estelle and Matthieu's"
+    ]
   },
-  ceremony: {
-    title: "Ceremony",
-    description: "The wedding ceremony will take place between the Abbey and the Castle.",
+  laicCeremony: {
+    date: "Saturday July 25, 2026",
+    title: "Fiesta",
+    location: "Domaine de Chaalis",
+    times: [
+      "6:00 PM - Secular Ceremony",
+      "7:30 PM - Cocktail hour",
+      "9:00 PM - Dinner",
+      "11:00 PM - Dancing party"
+    ]
   },
-  cocktail: {
-    title: "Cocktail Hour",
-    description: "Enjoy drinks and appetizers in front of the Castle.",
-  },
-  dinner: {
-    title: "Dinner",
-    description: "A festive dinner will be served in the Orangery.",
-  },
-  party: {
-    title: "Evening Party",
-    description: "Let's dance the night away in the Orangery!",
-  },
-  brunch: {
-    time: "12:00 PM - 4:00 PM",
-    title: "Day-After Brunch",
-    description: "Join us for a relaxed brunch in the Orangery the next day.",
-  },
+  returnBrunch: {
+    date: "Sunday July 26, 2026",
+    title: "Return",
+    location: "Domaine de Chaalis",
+    times: [
+      "12:00 PM to 4:00 PM - Brunch at Domaine de Chaalis"
+    ]
+  }
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { User, Utensils, MinusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,12 +6,7 @@ import { Label } from "@/components/ui/label";
 
 const GuestItem = ({ guest, index, handleGuestChange, handleRemoveGuest, canRemove, t }) => {
   return (
-    <motion.div 
-      layout 
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      transition={{ duration: 0.3 }}
+    <div
       className="p-4 border border-input rounded-md space-y-4 bg-background/50"
     >
       <div className="flex justify-between items-center">
@@ -48,7 +42,7 @@ const GuestItem = ({ guest, index, handleGuestChange, handleRemoveGuest, canRemo
           placeholder={t.rsvpForm.dietaryPlaceholder}
         />
       </div>
-    </motion.div>
+    </div>
   );
 };
 

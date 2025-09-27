@@ -6,7 +6,7 @@ export const commonEn = {
   navSchedule: "Schedule",
   navVenue: "Venue",
   navRSVP: "RSVP",
-  navGifts: "Gifts",
+  navGifts: "Wedding Registry",
   navMemories: "Memories",
-  navDressCode: "Dress Code",
+  navDressCode: "FAQ",
 };

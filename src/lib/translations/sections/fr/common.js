@@ -4,9 +4,9 @@ export const commonFr = {
   navHome: "Accueil",
   navStory: "Notre Histoire",
   navSchedule: "Programme",
-  navVenue: "Lieu",
+  navVenue: "Logistique",
   navRSVP: "RSVP",
-  navGifts: "Cadeaux",
+  navGifts: "Liste de mariage",
   navMemories: "Souvenirs",
-  navDressCode: "Dress Code",
+  navDressCode: "FAQ",
 };

@@ -11,9 +11,14 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <Button variant="ghost" size="icon" onClick={toggleLanguage} aria-label="Changer de langue">
-      <Globe className="h-5 w-5 text-primary" />
-      <span className="sr-only">{language === 'fr' ? 'Switch to English' : 'Passer en Français'}</span>
+    <Button 
+      variant="ghost" 
+      onClick={toggleLanguage} 
+      className="text-sm font-medium text-foreground hover:text-primary transition-colors underline justify-start flex items-center gap-2"
+      aria-label="Changer de langue"
+    >
+      <Globe className="h-4 w-4" />
+      {language === 'fr' ? 'Change to English' : 'Passer en Français'}
     </Button>
   );
 };

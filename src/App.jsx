@@ -2,13 +2,16 @@ import React, { Suspense } from "react";
 import { LanguageProvider } from "@/contexts/LanguageContext.jsx";
 import Navbar from "@/components/Navbar.jsx";
 import Hero from "@/components/Hero.jsx";
-import Story from "@/components/Story.jsx";
 import Schedule from "@/components/Schedule.jsx";
+import Transportation from "@/components/Transportation.jsx";
+import RegionGuide from "@/components/RegionGuide.jsx";
 import Venue from "@/components/Venue.jsx";
-import RSVP from "@/components/RSVP.jsx";
+import DressCode from "@/components/DressCode.jsx";
+import DietaryInfo from "@/components/DietaryInfo.jsx";
+import Contact from "@/components/Contact.jsx";
 import Gifts from "@/components/Gifts.jsx";
 import Memories from "@/components/Memories.jsx";
-import DressCode from "@/components/DressCode.jsx";
+import RSVP from "@/components/RSVP.jsx";
 import Footer from "@/components/Footer.jsx";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -19,14 +22,30 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
           <Navbar />
           <main className="flex-grow">
+            {/* Accueil */}
             <Hero />
-            <Story />
+            
+            {/* Programme */}
             <Schedule />
+            
+            {/* Logistique */}
+            <Transportation />
+            <RegionGuide />
             <Venue />
-            <RSVP />
-            <Gifts />
-            <Memories />
+            
+            {/* Q&A */}
             <DressCode />
+            <DietaryInfo />
+            <Contact />
+            
+            {/* Cadeaux */}
+            <Gifts />
+            
+            {/* Souvenirs */}
+            <Memories />
+            
+            {/* RSVP */}
+            <RSVP />
           </main>
           <Footer />
           <Toaster />

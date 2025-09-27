@@ -1,5 +1,25 @@
 export const dressCodeEn = {
-  dressCodeTitle: "Dress Code",
-  dressCodeDescription: "We would love for you to dress up with us! The attire is formal / cocktail. Think elegant and festive!",
-  childrenInfo: "To allow all guests to relax and enjoy themselves, we have chosen to make our wedding an adults-only occasion. We thank you for your understanding.",
+  faqTitle: "FAQ",
+  faqs: [
+    {
+      question: "What is the dress code?",
+      answer: "• For Thursday July 23rd and Sunday July 26th: cocktail attire\n\n• For Saturday July 25th: formal\n\n• P.S. Please leave white for the bride."
+    },
+    {
+      question: "Can we come with children?",
+      answer: "While we love all the little ones in our lives, we kindly request that our celebration be an adult-only event."
+    },
+    {
+      question: "Where can I book hair and makeup?",
+      answer: "We recommend using the Treatwell app to easily find and book professional hair and makeup services near you."
+    },
+    {
+      question: "How to contact us?",
+      answer: "Via Whatsapp:\nEstelle: +33 6 35 02 02 91\nMatthieu: +33 7 67 55 11 04"
+    },
+    {
+      question: "What is the emergency number in France?",
+      answer: "The emergency number is 112"
+    }
+  ]
 };

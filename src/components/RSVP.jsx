@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
 import { Check, X, Users, Utensils, MessageSquare, CalendarCheck, PlusCircle, MinusCircle, Mail, User as UserIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -73,13 +71,7 @@ const AttendanceOptions = ({ attendance, setAttendance, t }) => {
 };
 
 const GuestItem = ({ guest, index, handleGuestChange, handleRemoveGuest, canRemove, t }) => (
-  <motion.div 
-    layout 
-    initial={{ opacity: 0, y: -10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -10 }}
-    transition={{ duration: 0.3 }}
-    className="p-4 border border-input rounded-md space-y-4 bg-background/50"
+  <div className="p-4 border border-input rounded-md space-y-4 bg-background/50"
   >
     <div className="flex justify-between items-center">
       <h4 className="text-sm font-medium text-primary">{t.rsvpForm.guest} {index + 1}</h4>
@@ -114,7 +106,7 @@ const GuestItem = ({ guest, index, handleGuestChange, handleRemoveGuest, canRemo
         placeholder={t.rsvpForm.dietaryPlaceholder}
       />
     </div>
-  </motion.div>
+  </div>
 );
 
 const GuestList = ({ guests, handleGuestChange, handleAddGuest, handleRemoveGuest, maxGuests, t }) => (
@@ -122,7 +114,7 @@ const GuestList = ({ guests, handleGuestChange, handleAddGuest, handleRemoveGues
     <Label className="block text-sm font-medium text-foreground">
       <Users className="inline w-4 h-4 mr-2 text-primary" /> {t.rsvpForm.guestListTitle}
     </Label>
-    <AnimatePresence>
+    <div>
       {guests.map((guest, index) => (
         <GuestItem
           key={guest.id || index}
@@ -134,7 +126,7 @@ const GuestList = ({ guests, handleGuestChange, handleAddGuest, handleRemoveGues
           t={t}
         />
       ))}
-    </AnimatePresence>
+    </div>
     <Button 
       type="button" 
       variant="outline" 
@@ -163,8 +155,6 @@ const MessageField = ({ message, setMessage, t }) => (
 );
 
 const RSVP = () => {
-  const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const { toast } = useToast();
   const { language } = useLanguage();
   const t = translations[language].rsvp;
@@ -261,13 +251,7 @@ const RSVP = () => {
   return (
     <section id="rsvp" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto text-center mb-12"
-        >
+        <div className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-serif font-light text-primary mb-6">
             {t.rsvpTitle}
           </h2>
@@ -279,14 +263,9 @@ const RSVP = () => {
             {t.rsvpDeadline}
           </p>
            <p className="text-xs text-muted-foreground mt-4">{t.rsvpForm.adultsOnly}</p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-2xl mx-auto bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl shadow-2xl p-8 md:p-10 border border-primary/10"
-        >
+        <div className="max-w-2xl mx-auto bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl shadow-2xl p-8 md:p-10 border border-primary/10">
           <form onSubmit={handleSubmit} className="space-y-8">
             <PrimaryGuestFields
               primaryGuestName={primaryGuestName}
@@ -319,7 +298,7 @@ const RSVP = () => {
               </Button>
             </div>
           </form>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

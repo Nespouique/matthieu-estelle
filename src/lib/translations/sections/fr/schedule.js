@@ -1,28 +1,31 @@
 export const scheduleFr = {
-  scheduleTitle: "Programme du Mariage",
-  arrival: {
-    title: "Arrivée des Invités",
-    description: "Bienvenue au Domaine de Chaalis. Installez-vous confortablement.",
+  scheduleTitle: "Programme",
+  civilMarriage: {
+    date: "Jeudi 23 Juillet 2026",
+    title: "Mariage Civil",
+    location: "Houilles",
+    times: [
+      "14h45 - Mariage à la mairie",
+      "16h30 - Cocktail de bienvenue chez Estelle et Matthieu"
+    ]
   },
-  ceremony: {
-    title: "Cérémonie",
-    description: "La cérémonie de mariage aura lieu entre l'Abbaye et le Château.",
+  laicCeremony: {
+    date: "Samedi 25 Juillet 2026",
+    title: "Fiesta",
+    location: "Domaine de Chaalis",
+    times: [
+      "18h00 - Cérémonie Laïque",
+      "19h30 - Vin d'honneur",
+      "21h - Dîner",
+      "23h - Soirée dansante"
+    ]
   },
-  cocktail: {
-    title: "Vin d'Honneur",
-    description: "Profitez de rafraîchissements et d'amuse-bouches devant le Château.",
-  },
-  dinner: {
-    title: "Dîner",
-    description: "Un dîner festif sera servi dans l'Orangerie.",
-  },
-  party: {
-    title: "Soirée Dansante",
-    description: "Dansons jusqu'au bout de la nuit dans l'Orangerie !",
-  },
-  brunch: {
-    time: "12h00 - 16h00",
-    title: "Brunch du Lendemain",
-    description: "Rejoignez-nous pour un brunch décontracté dans l'Orangerie le lendemain.",
-  },
+  returnBrunch: {
+    date: "Dimanche 26 Juillet 2026",
+    title: "Retour",
+    location: "Domaine de Chaalis",
+    times: [
+      "12h - Brunch au Domaine de Chaalis"
+    ]
+  }
 };
