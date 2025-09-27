@@ -12,7 +12,7 @@ export const venueFr = {
     townHall: {
       name: "Mairie de Houilles",
       address: "16 Rue Gambetta, 78800 Houilles",
-      mapsLink: "https://www.google.com/maps/place/16+Rue+Gambetta,+78800+Houilles",
+      mapsLink: "https://maps.app.goo.gl/ooSaeYfedy7Ryn8m7",
       access: "Accès depuis Paris :",
       parking: "Parking payant sur place",
       transports: [
@@ -63,7 +63,7 @@ export const venueFr = {
     chaalis: {
       name: "Domaine de Chaalis",
       address: "60300 Fontaine-Chaalis",
-      mapsLink: "https://www.google.com/maps/place/Domaine+de+Chaalis/@49.1500562,2.6800018,17z",
+      mapsLink: "https://maps.app.goo.gl/kM2gLTWmGVwUGuab8",
       access: "Accès depuis Paris : voiture par l'autoroute A1, sortie n°7, direction Saint-Witz et Ermenonville",
       parking: "Parking gratuit sur place",
       transports: []
