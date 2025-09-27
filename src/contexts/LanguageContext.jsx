@@ -3,11 +3,35 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  // Try to get language from localStorage, default to 'fr'
-  const [language, setLanguage] = useState(() => {
+  // Function to detect user's preferred language
+  const detectUserLanguage = () => {
+    // Check if there's a saved preference
     const savedLanguage = localStorage.getItem("wedding-language");
-    return savedLanguage || "fr";
-  });
+    if (savedLanguage) {
+      return savedLanguage;
+    }
+
+    // Default to English
+    let detectedLanguage = "en";
+
+    // Try to detect browser/device language
+    if (typeof window !== "undefined" && window.navigator) {
+      const userLanguage = 
+        navigator.language || 
+        navigator.languages?.[0] || 
+        navigator.userLanguage || 
+        navigator.browserLanguage;
+
+      // If user's language starts with 'fr', switch to French
+      if (userLanguage && userLanguage.toLowerCase().startsWith('fr')) {
+        detectedLanguage = "fr";
+      }
+    }
+
+    return detectedLanguage;
+  };
+
+  const [language, setLanguage] = useState(() => detectUserLanguage());
 
   // Update localStorage when language changes
   useEffect(() => {

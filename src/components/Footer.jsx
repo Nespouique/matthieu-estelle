@@ -16,9 +16,6 @@ const Footer = () => {
         <div className="flex justify-center mb-6">
           <Logo />
         </div>
-        <p className="text-sm text-muted-foreground mb-2">
-          {t.footerText.replace('{year}', currentYear.toString())}
-        </p>
         <p className="text-sm text-muted-foreground flex items-center justify-center">
           {t.madeWithLove} <Heart className="w-4 h-4 text-primary mx-1.5" /> {commonT.estelle} & {commonT.matthieu}
         </p>
