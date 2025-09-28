@@ -8,7 +8,6 @@ const Footer = () => {
   const { language } = useLanguage();
   const t = translations[language].footer;
   const commonT = translations[language].common;
-  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-background border-t border-border py-12 text-center">

@@ -1,6 +1,5 @@
 import { commonEn } from './sections/en/common.js';
 import { heroEn } from './sections/en/hero.js';
-import { storyEn } from './sections/en/story.js';
 import { scheduleEn } from './sections/en/schedule.js';
 import { venueEn } from './sections/en/venue.js';
 import { rsvpEn } from './sections/en/rsvp.js';
@@ -13,7 +12,6 @@ export const en = {
   localeForDate: 'en-US',
   common: commonEn,
   hero: heroEn,
-  story: storyEn,
   schedule: scheduleEn,
   venue: venueEn,
   rsvp: rsvpEn,

@@ -1,6 +1,5 @@
 import { commonFr } from './sections/fr/common.js';
 import { heroFr } from './sections/fr/hero.js';
-import { storyFr } from './sections/fr/story.js';
 import { scheduleFr } from './sections/fr/schedule.js';
 import { venueFr } from './sections/fr/venue.js';
 import { rsvpFr } from './sections/fr/rsvp.js';
@@ -13,7 +12,6 @@ export const fr = {
   localeForDate: 'fr-FR',
   common: commonFr,
   hero: heroFr,
-  story: storyFr,
   schedule: scheduleFr,
   venue: venueFr,
   rsvp: rsvpFr,

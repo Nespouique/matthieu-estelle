@@ -3,12 +3,8 @@ import { LanguageProvider } from "@/contexts/LanguageContext.jsx";
 import Navbar from "@/components/Navbar.jsx";
 import Hero from "@/components/Hero.jsx";
 import Schedule from "@/components/Schedule.jsx";
-import Transportation from "@/components/Transportation.jsx";
-import RegionGuide from "@/components/RegionGuide.jsx";
 import Venue from "@/components/Venue.jsx";
 import DressCode from "@/components/DressCode.jsx";
-import DietaryInfo from "@/components/DietaryInfo.jsx";
-import Contact from "@/components/Contact.jsx";
 import Gifts from "@/components/Gifts.jsx";
 import Memories from "@/components/Memories.jsx";
 import RSVP from "@/components/RSVP.jsx";
@@ -28,15 +24,11 @@ const App = () => {
             {/* Programme */}
             <Schedule />
             
-            {/* Logistique */}
-            <Transportation />
-            <RegionGuide />
+            {/* Lieu */}
             <Venue />
             
             {/* Q&A */}
             <DressCode />
-            <DietaryInfo />
-            <Contact />
             
             {/* Cadeaux */}
             <Gifts />

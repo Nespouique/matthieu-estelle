@@ -1,0 +1,40 @@
+Fichiers à supprimer manuellement :
+
+## Composants vides/inutilisés :
+- src/components/Contact.jsx (vide)
+- src/components/DietaryInfo.jsx (vide) 
+- src/components/Transportation.jsx (vide)
+- src/components/WeddingParty.jsx (vide)
+- src/components/GuestBook.jsx (vide)
+- src/components/RegionGuide.jsx (contient du code mais pas utilisé dans App.jsx)
+- src/components/Story.jsx (contient du code mais pas utilisé dans App.jsx)
+
+## Dossier memories obsolète :
+- src/components/memories/ (tout le dossier)
+  - MemoryCard.jsx
+  - MemoryForm.jsx  
+  - MemoryList.jsx
+
+## Traductions obsolètes :
+- src/lib/translations/sections/fr/contact.js
+- src/lib/translations/sections/fr/dietaryInfo.js
+- src/lib/translations/sections/fr/transportation.js
+- src/lib/translations/sections/fr/weddingParty.js
+- src/lib/translations/sections/fr/guestBook.js
+- src/lib/translations/sections/fr/regionGuide.js
+- src/lib/translations/sections/fr/story.js
+
+## Mêmes fichiers en anglais :
+- src/lib/translations/sections/en/contact.js
+- src/lib/translations/sections/en/dietaryInfo.js  
+- src/lib/translations/sections/en/transportation.js
+- src/lib/translations/sections/en/weddingParty.js
+- src/lib/translations/sections/en/guestBook.js
+- src/lib/translations/sections/en/regionGuide.js
+- src/lib/translations/sections/en/story.js
+
+## Composants UI inutilisés :
+Vérifier si ces composants UI sont utilisés quelque part :
+- src/components/ui/card.jsx (semble inutilisé)
+- src/components/ui/modal.jsx (si elle existe)
+- src/components/ui/tabs.jsx (si elle existe)
