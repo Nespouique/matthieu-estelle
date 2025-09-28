@@ -28,8 +28,8 @@ const DressCode = () => {
                 className="flex items-center justify-between w-full p-6 text-left"
               >
                 <div className="flex items-center">
-                  <HelpCircle className="w-6 h-6 text-primary mr-3 flex-shrink-0" />
-                  <h3 className="text-lg text-primary">{faq.question}</h3>
+                  <HelpCircle className="w-5 h-5 text-primary mr-3 flex-shrink-0" />
+                  <h3 className="text-md text-primary font-semibold">{faq.question}</h3>
                 </div>
                 {openFaq === index ? (
                   <ChevronUp className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
@@ -45,7 +45,7 @@ const DressCode = () => {
               >
                 <div className="px-6 pb-6">
                   {faq.answer.split('\n\n').map((paragraph, pIndex) => (
-                    <div key={pIndex} className="text-foreground/80 leading-relaxed mb-3 last:mb-0">
+                    <div key={pIndex} className="text-sm text-foreground/80 leading-relaxed mb-3 last:mb-0">
                       {paragraph.split('\n').map((line, lIndex) => (
                         <div key={lIndex} className="mb-1 last:mb-0">
                           {/* Gestion spéciale pour les liens Treatwell */}

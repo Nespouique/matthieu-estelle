@@ -25,7 +25,7 @@ export const scheduleEn = {
     title: "Return",
     location: "Domaine de Chaalis",
     times: [
-      "12:00 PM to 4:00 PM - Brunch at Domaine de Chaalis"
+      "12:00 PM - Brunch at Domaine de Chaalis"
     ]
   }
 };

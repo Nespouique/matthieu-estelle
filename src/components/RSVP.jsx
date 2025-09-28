@@ -276,9 +276,8 @@ const RSVP = () => {
             <div className="text-center py-2">
               <Button 
                 type="submit" 
-                size="lg" 
                 disabled={!isFormValid() || isSubmitting || isSubmitted}
-                className={`px-10 py-3 text-base w-full sm:w-auto group transition-all ${
+                className={`px-10 h-12 w-full sm:w-auto group transition-all ${
                   isFormValid() && !isSubmitting && !isSubmitted
                     ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
                     : 'bg-foreground/20 text-foreground/50 cursor-not-allowed'

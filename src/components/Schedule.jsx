@@ -80,11 +80,11 @@ const Schedule = () => {
           </div>
 
           {/* Layout desktop : horizontal */}
-          <div className="hidden md:flex md:justify-between md:items-center relative z-10 gap-8">
+          <div className="hidden md:flex md:justify-between md:items-stretch relative z-10 gap-8">
             {scheduleItems.map((item, index) => (
               <div
                 key={index}
-                className="flex-1 bg-white bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl shadow-lg border border-primary/10 hover:shadow-primary/20 transition-shadow p-6 lg:p-8 relative"
+                className="flex-1 bg-white bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl shadow-lg border border-primary/10 hover:shadow-primary/20 transition-shadow p-6 lg:p-8 relative flex flex-col"
               >
                 <div className="text-center">
                   <div className="mb-4 flex justify-center">

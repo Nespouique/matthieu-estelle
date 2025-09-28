@@ -7,16 +7,25 @@ const Venue = () => {
   const { language } = useLanguage();
   const t = translations[language].venue;
   const [isTravelInfoOpen, setIsTravelInfoOpen] = useState(false);
+  const [isVenuesOpen, setIsVenuesOpen] = useState(false);
+  const [isAccommodationOpen, setIsAccommodationOpen] = useState(false);
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [userHasInteracted, setUserHasInteracted] = useState(false);
 
-  // Ouvrir l'accordéon par défaut sur desktop seulement si l'utilisateur n'a pas encore interagi
+  // Ouvrir tous les accordéons par défaut sur desktop seulement si l'utilisateur n'a pas encore interagi
   useEffect(() => {
     const checkScreenSize = () => {
       if (!userHasInteracted) {
         if (window.innerWidth >= 768) { // md breakpoint
           setIsTravelInfoOpen(true);
+          setIsVenuesOpen(true);
+          setIsAccommodationOpen(true);
+          setIsGuideOpen(true);
         } else {
           setIsTravelInfoOpen(false);
+          setIsVenuesOpen(false);
+          setIsAccommodationOpen(false);
+          setIsGuideOpen(false);
         }
       }
     };
@@ -30,6 +39,21 @@ const Venue = () => {
   const toggleTravelInfo = () => {
     setUserHasInteracted(true);
     setIsTravelInfoOpen(!isTravelInfoOpen);
+  };
+
+  const toggleVenues = () => {
+    setUserHasInteracted(true);
+    setIsVenuesOpen(!isVenuesOpen);
+  };
+
+  const toggleAccommodation = () => {
+    setUserHasInteracted(true);
+    setIsAccommodationOpen(!isAccommodationOpen);
+  };
+
+  const toggleGuide = () => {
+    setUserHasInteracted(true);
+    setIsGuideOpen(!isGuideOpen);
   };
 
   const venues = [
@@ -65,15 +89,15 @@ const Venue = () => {
   return (
     <section id="venue" className="py-20 section-darker section-transition">
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-serif font-light text-primary mb-6">{t.venueTitle}</h2>
           <div className="w-20 h-0.5 bg-primary mx-auto mb-8"></div>
-          <p className="text-lg text-foreground/80 leading-relaxed max-w-4xl mx-auto">
+          <p className="text-foreground/80 leading-relaxed max-w-4xl mx-auto">
             {t.introText}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start mb-16">
+        <div className="grid md:grid-cols-2 gap-12 items-start mb-12">
           <div className="relative">
             <div className="rounded-xl overflow-hidden shadow-2xl">
               <img
@@ -107,7 +131,7 @@ const Venue = () => {
               >
                 <div className="pt-4">
                   {t.travelInfo.description.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="text-foreground/80 leading-relaxed mb-4 last:mb-0">
+                    <p key={index} className="text-sm text-foreground/80 leading-relaxed mb-4 last:mb-0">
                       {paragraph}
                     </p>
                   ))}
@@ -118,18 +142,35 @@ const Venue = () => {
         </div>
 
         {/* Section des 3 lieux - encapsulée dans une carte */}
-        <div className="mb-16">
+        <div className="mb-12">
           <div className="p-6 bg-background rounded-xl shadow-lg border border-secondary/10">
-            <div className="flex items-center mb-6">
-              <MapPin className="w-7 h-7 text-primary mr-3" />
-              <h3 className="text-xl text-primary font-semibold">{t.venues.title}</h3>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              {venues.map((venue, index) => {
-                const IconComponent = venue.icon;
-                return (
+            <button
+              onClick={toggleVenues}
+              className="flex items-center justify-between w-full text-left"
+            >
+              <div className="flex items-center">
+                <MapPin className="w-7 h-7 text-primary mr-3" />
+                <h3 className="text-xl text-primary font-semibold">{t.venues.title}</h3>
+              </div>
+              {isVenuesOpen ? (
+                <ChevronUp className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
+              )}
+            </button>
+            
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                isVenuesOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+              }`}
+            >
+              <div className="pt-6">
+                <div className="grid md:grid-cols-3 gap-6">
+                  {venues.map((venue, index) => {
+                    const IconComponent = venue.icon;
+                    return (
                   <div key={index} className="p-4 bg-secondary/25 rounded-lg border border-secondary/30">
-                    <h4 className="text-lg text-foreground/80 mb-2 flex items-center">
+                    <h4 className="text-md text-foreground/80 mb-2 flex items-center">
                       <IconComponent className="w-5 h-5 text-foreground/80 mr-2" />
                       {venue.name}
                     </h4>
@@ -137,7 +178,7 @@ const Venue = () => {
                     href={venue.mapsLink} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-foreground mb-2 text-sm hover:text-primary transition-colors block underline"
+                    className="text-secondary mb-2 text-sm hover:text-primary transition-colors block underline"
                   >
                     {venue.address}
                   </a>
@@ -198,26 +239,47 @@ const Venue = () => {
                 </div>
                 );
               })}
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Section hébergements */}
-        <div className="mb-16">
+        <div className="mb-12">
           <div className="p-6 bg-background rounded-xl shadow-lg border border-secondary/10">
-            <div className="flex items-center mb-4">
-              <Hotel className="w-7 h-7 text-primary mr-3" />
-              <h3 className="text-xl text-primary font-semibold">{t.accommodation.title}</h3>
-            </div>
-            <p className="text-foreground/80 mb-6">{t.accommodation.description}</p>
-            <div className="grid md:grid-cols-3 gap-4">
-              {t.accommodation.options.map((option, index) => (
+            <button
+              onClick={toggleAccommodation}
+              className="flex items-center justify-between w-full text-left"
+            >
+              <div className="flex items-center">
+                <Hotel className="w-7 h-7 text-primary mr-3" />
+                <h3 className="text-xl text-primary font-semibold">{t.accommodation.title}</h3>
+              </div>
+              {isAccommodationOpen ? (
+                <ChevronUp className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
+              )}
+            </button>
+            
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                isAccommodationOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+              }`}
+            >
+              <div className="pt-4">
+                <p className="text-sm text-foreground/80 mb-6">{t.accommodation.description}</p>
+                <div className="grid md:grid-cols-3 gap-4">
+                  {t.accommodation.options.map((option, index) => (
                 <div key={index} className="p-4 bg-secondary/25 rounded-lg border border-secondary/30">
-                  <h5 className="font-semibold text-secondary mb-1">{option.name}</h5>
-                  <p className="text-sm text-foreground/70 mb-1">{option.address}</p>
-                  <p className="text-sm text-foreground/80 font-medium">{option.price}</p>
+                  <h4 className="text-md text-foreground/80 mb-2 flex items-center">{option.name}</h4>
+                  <p className="text-secondary mb-2 text-sm hover:text-primary transition-colors block underline">{option.address}</p>
+                  <p className="text-foreground/70 mb-2 text-sm">{option.price}</p>
                 </div>
               ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -225,21 +287,38 @@ const Venue = () => {
         {/* Section Notre Guide */}
         <div>
           <div className="p-6 bg-background rounded-xl shadow-lg border border-secondary/10">
-            <div className="flex items-center mb-6">
-              <Book className="w-7 h-7 text-primary mr-3" />
-              <h3 className="text-xl text-primary font-semibold">{t.ourGuide.title}</h3>
-            </div>
-            <div className="mb-6">
-              {t.ourGuide.description.split('\n\n').map((paragraph, index) => (
-                <p key={index} className="text-foreground/80 leading-relaxed mb-4 last:mb-0">
-                  {paragraph}
-                </p>
-              ))}
+            <button
+              onClick={toggleGuide}
+              className="flex items-center justify-between w-full text-left"
+            >
+              <div className="flex items-center">
+                <Book className="w-7 h-7 text-primary mr-3" />
+                <h3 className="text-xl text-primary font-semibold">{t.ourGuide.title}</h3>
+              </div>
+              {isGuideOpen ? (
+                <ChevronUp className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
+              )}
+            </button>
+            
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                isGuideOpen ? 'max-h-none opacity-100' : 'max-h-0 opacity-0'
+              }`}
+            >
+              <div className="pt-6">
+                <div className="mb-6">
+                  {t.ourGuide.description.split('\n\n').map((paragraph, index) => (
+                    <p key={index} className="text-sm text-foreground/80 leading-relaxed mb-4 last:mb-0">
+                      {paragraph}
+                    </p>
+                  ))}
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {t.ourGuide.places.map((place, index) => (
                 <div key={index} className="p-4 bg-secondary/25 rounded-lg border border-secondary/30">
-                  <h4 className="text-lg text-foreground/80 mb-3">{place.name}</h4>
+                  <h4 className="text-md text-foreground/80 mb-3">{place.name}</h4>
                   {/* Image du lieu */}
                   {place.image && (
                     <div className="mb-4 rounded-lg overflow-hidden">
@@ -250,17 +329,19 @@ const Venue = () => {
                       />
                     </div>
                   )}
-                  <h5 className="font-semibold text-foreground mb-1">{place.venue}</h5>
+                  <h5 className="text-sm font-semibold text-foreground mb-1">{place.venue}</h5>
                   <a 
                     href={place.mapsLink} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-foreground text-sm hover:text-primary transition-colors underline block"
+                    className="text-secondary text-sm hover:text-primary transition-colors underline block"
                   >
                     {place.address}
                   </a>
                 </div>
               ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

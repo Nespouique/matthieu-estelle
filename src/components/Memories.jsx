@@ -103,7 +103,7 @@ import { memoriesUploadService } from '@/services/memoriesUpload';
           {/* État initial - pas d'enregistrement */}
           {!isRecording && !audioBlob && (
             <>
-              <span className="text-sm text-foreground">{t.startRecorderButton}</span>
+              <span className="text-sm text-primary/70 font-medium">{t.startRecorderButton}</span>
               <Button
                 type="button"
                 onClick={startRecording}
@@ -120,7 +120,7 @@ import { memoriesUploadService } from '@/services/memoriesUpload';
           {isRecording && (
             <>
               <div className="flex items-center">
-                <span className="text-sm text-foreground">{t.recordingStatus} {formatTime(recordingTime)}</span>
+                <span className="text-sm text-primary/70 font-medium">{t.recordingStatus} {formatTime(recordingTime)}</span>
                 <WaveAnimation />
               </div>
               <Button
@@ -138,7 +138,7 @@ import { memoriesUploadService } from '@/services/memoriesUpload';
           {/* État après enregistrement */}
           {audioBlob && !isRecording && (
             <>
-              <span className="text-sm text-foreground">{t.audioRecordedStatus} {formatTime(audioDuration)}</span>
+              <span className="text-sm text-primary/70 font-medium">{t.audioRecordedStatus} {formatTime(audioDuration)}</span>
               <Button
                 type="button"
                 onClick={deleteRecording}
@@ -166,7 +166,7 @@ import { memoriesUploadService } from '@/services/memoriesUpload';
     <div className="relative bg-secondary/10 rounded-lg p-3 flex items-center space-x-3">
       <div className="flex-grow min-w-0">
         <p className="text-sm font-medium text-foreground truncate">{file.name}</p>
-        <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
+        <p className="text-xs text-muted-foreground ">{formatFileSize(file.size)}</p>
       </div>
       <Button
         type="button"
@@ -364,7 +364,7 @@ const MemoryForm = ({ t }) => {
               <p className="text-sm text-primary/70 font-medium">
                 {files.length >= 10 ? t.maxReached : t.selectFiles}
               </p>
-              <p className="text-xs text-muted-foreground mt-1">
+              <p className="text-xs text-muted-foreground mt-1 font-normal">
                 {t.fileTypes}
               </p>
             </div>
@@ -394,7 +394,11 @@ const MemoryForm = ({ t }) => {
           <Button 
             type="submit" 
             disabled={isUploading || !name.trim()}
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group h-12"
+            className={`w-full group h-12 ${
+              !isUploading && name.trim()
+                ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
+                : 'bg-foreground/20 text-foreground/50 cursor-not-allowed'
+            }`}
           >
             {isUploading ? (
               <>

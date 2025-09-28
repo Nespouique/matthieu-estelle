@@ -65,14 +65,14 @@ const ContributionModal = ({ isOpen, onClose, translations }) => {
         <div className="space-y-6">
           {/* SEPA Transfer */}
           <div className="bg-secondary/25 border border-secondary/30 rounded-xl p-6">
-            <h3 className="text-xl text-primary mb-4">
+            <h3 className="text-lg text-primary mb-4 font-semibold">
               {translations.modal.sepaTitle}
             </h3>
             
             {/* IBAN */}
             <div className="mb-4">
               <div className="flex items-center justify-between">
-                <div className="text-md font-mono text-foreground/80">
+                <div className="text-sm font-mono text-foreground/80">
                   {translations.modal.iban}
                 </div>
                 <button
@@ -91,7 +91,7 @@ const ContributionModal = ({ isOpen, onClose, translations }) => {
             {/* BIC */}
             <div>
               <div className="flex items-center justify-between">
-                <div className="text-md font-mono text-foreground/80">
+                <div className="text-sm font-mono text-foreground/80">
                   {translations.modal.bic}
                 </div>
                 <button
@@ -110,12 +110,12 @@ const ContributionModal = ({ isOpen, onClose, translations }) => {
 
           {/* Revolut */}
           <div className="bg-secondary/25 border border-secondary/30 rounded-xl p-6">
-            <h3 className="text-xl text-primary mb-4">
+            <h3 className="text-lg text-primary mb-4 font-semibold">
               {translations.modal.revolutTitle}
             </h3>
             <button
               onClick={handleRevolutClick}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 px-6 rounded-lg font-medium transition-colors"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 px-6 rounded-lg font-medium transition-colors text-sm"
             >
               {translations.modal.revolutButton}
             </button>
@@ -123,10 +123,10 @@ const ContributionModal = ({ isOpen, onClose, translations }) => {
 
           {/* Physical contribution */}
           <div className="bg-secondary/25 border border-secondary/30 rounded-xl p-6">
-            <h3 className="text-xl text-primary mb-4">
+            <h3 className="text-lg text-primary mb-4 font-semibold">
               {translations.modal.urneTitle}
             </h3>
-            <p className="text-foreground/80 leading-relaxed">
+            <p className="text-foreground/80 leading-relaxed text-sm">
               {translations.modal.urneDescription}
             </p>
           </div>

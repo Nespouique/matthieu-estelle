@@ -16,8 +16,8 @@ export const scheduleFr = {
     times: [
       "18h00 - Cérémonie Laïque",
       "19h30 - Vin d'honneur",
-      "21h - Dîner",
-      "23h - Soirée dansante"
+      "21h00 - Dîner",
+      "23h00 - Soirée dansante"
     ]
   },
   returnBrunch: {
@@ -25,7 +25,7 @@ export const scheduleFr = {
     title: "Retour",
     location: "Domaine de Chaalis",
     times: [
-      "12h - Brunch au Domaine de Chaalis"
+      "12h00 - Brunch au Domaine de Chaalis"
     ]
   }
 };
