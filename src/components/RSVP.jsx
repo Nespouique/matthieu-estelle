@@ -75,11 +75,15 @@ const RSVP = () => {
     setIsSubmitting(true);
     
     try {
-      // Prepare data as URL parameters
+      // Prepare data with specific attendance fields
       const params = new URLSearchParams({
         fullName: fullName.trim(),
         email: email.trim(),
-        attendance: cannotAttend ? 'cannotAttend' : attendanceEvents.join(', '),
+        presenceMairie: attendanceEvents.includes('mairie') ? 'O' : 'N',
+        presenceCocktail: attendanceEvents.includes('cocktail') ? 'O' : 'N',
+        presenceCeremonie: attendanceEvents.includes('ceremony') ? 'O' : 'N',
+        presenceBrunch: attendanceEvents.includes('brunch') ? 'O' : 'N',
+        absence: cannotAttend ? 'O' : 'N',
         diet: dietaryRestrictions.trim()
       });
 
@@ -300,19 +304,6 @@ const RSVP = () => {
                   </>
                 )}
               </Button>
-              
-              {/* Success message */}
-              {isSubmitted && (
-                <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
-                  <div className="flex items-center justify-center text-green-800">
-                    <CheckCircle className="w-5 h-5 mr-2 text-green-600" />
-                    <div className="text-center">
-                      <p className="font-medium">{t.rsvpForm.success}</p>
-                      <p className="text-sm mt-1">{t.rsvpForm.successMessage}</p>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
           </form>
         </div>
