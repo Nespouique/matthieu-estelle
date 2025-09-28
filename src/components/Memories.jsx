@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, Image as ImageIcon, Send, Heart } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Send, Heart, FileText, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -7,173 +7,265 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext.jsx';
 import { translations } from '@/lib/translations';
+import { memoriesUploadService } from '@/services/memoriesUpload';
 
-const MemoryForm = ({ onAddMemory, t }) => {
-  const [name, setName] = useState('');
-  const [message, setMessage] = useState('');
-  const [file, setFile] = useState(null);
-  const [filePreview, setFilePreview] = useState(null);
-  const fileInputRef = useRef(null);
-
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      setFile(selectedFile);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFilePreview(reader.result);
-      };
-      reader.readAsDataURL(selectedFile);
-    }
+const FileInfo = ({ file, onRemove }) => {
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!name.trim() || !message.trim()) {
-      toast({ title: t.memoriesForm.error, description: t.memoriesForm.nameMessageError, variant: "destructive" });
-      return;
-    }
-    onAddMemory({ name, message, file, filePreview, date: new Date().toISOString() });
-    setName('');
-    setMessage('');
-    setFile(null);
-    setFilePreview(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = ""; 
-    }
-  };
-  const { toast } = useToast();
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-6 p-6 md:p-8 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl shadow-xl border border-primary/10"
-    >
-      <div>
-        <Label htmlFor="memoryName" className="flex items-center mb-1 text-sm font-medium text-foreground">
-          <Heart className="w-4 h-4 mr-2 text-primary" /> {t.memoriesForm.name} *
-        </Label>
-        <Input
-          id="memoryName"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder={t.memoriesForm.namePlaceholder}
-          required
-        />
+    <div className="relative bg-secondary/10 rounded-lg p-3 flex items-center space-x-3">
+      <div className="flex-grow min-w-0">
+        <p className="text-sm font-medium text-foreground truncate">{file.name}</p>
+        <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
       </div>
-      <div>
-        <Label htmlFor="memoryMessage" className="flex items-center mb-1 text-sm font-medium text-foreground">
-          <MessageCircle className="w-4 h-4 mr-2 text-primary" /> {t.memoriesForm.message} *
-        </Label>
-        <Textarea
-          id="memoryMessage"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder={t.memoriesForm.messagePlaceholder}
-          rows="4"
-          required
-        />
-      </div>
-      <div>
-        <Label htmlFor="memoryFile" className="flex items-center mb-1 text-sm font-medium text-foreground">
-          <ImageIcon className="w-4 h-4 mr-2 text-primary" /> {t.memoriesForm.file}
-        </Label>
-        <Input
-          id="memoryFile"
-          type="file"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          accept="image/*,video/*"
-          className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
-        />
-        {filePreview && (
-          <div className="mt-4">
-            {file && file.type.startsWith('image/') ? (
-              <img src={filePreview} alt="Aperçu du fichier" className="max-h-40 rounded-md shadow-md" />
-            ) : (
-              <video src={filePreview} controls className="max-h-40 rounded-md shadow-md"></video>
-            )}
-          </div>
-        )}
-      </div>
-      <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group">
-        {t.memoriesForm.submit} <Send className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+      <Button
+        type="button"
+        variant="ghost"
+        size="sm"
+        onClick={() => onRemove(file)}
+        className="flex-shrink-0 h-8 w-8 p-0 hover:bg-destructive/10 hover:text-destructive"
+      >
+        <X className="w-4 h-4" />
       </Button>
-    </form>
+    </div>
   );
 };
 
-const MemoryCard = ({ memory, t }) => {
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(t.localeForDate, options);
+const MemoryForm = ({ t }) => {
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  const [files, setFiles] = useState([]);
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef(null);
+  const { toast } = useToast();
+
+  const handleFileSelect = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e) => {
+    const selectedFiles = Array.from(e.target.files || []);
+    
+    // Valider les fichiers
+    const errors = memoriesUploadService.validateFiles(selectedFiles);
+    if (errors.length > 0) {
+      toast({
+        title: t.memories.validationError,
+        description: errors.join(', '),
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Ajouter les nouveaux fichiers sans dépasser 10
+    const newFiles = [...files, ...selectedFiles].slice(0, 10);
+    setFiles(newFiles);
+
+    // Reset l'input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const removeFile = (fileToRemove) => {
+    setFiles(files.filter(file => file !== fileToRemove));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!name.trim()) {
+      toast({
+        title: t.memories.error,
+        description: t.memories.nameRequired,
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (files.length === 0) {
+      toast({
+        title: t.memories.error, 
+        description: t.memories.filesRequired,
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsUploading(true);
+
+    try {
+      const result = await memoriesUploadService.uploadMemories(files, name.trim(), message.trim());
+      
+      toast({
+        title: t.memories.uploadSuccess,
+        description: `${result.filesUploaded} ${t.memories.uploadSuccessDescription}`,
+        className: "border-green-200 bg-green-50",
+        style: {
+          borderColor: "#bbf7d0",
+          backgroundColor: "#f0fdf4",
+          color: "#166534"
+        }
+      });
+
+      // Reset du formulaire
+      setName('');
+      setMessage('');
+      setFiles([]);
+      
+    } catch (error) {
+      toast({
+        title: t.memories.uploadError,
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (
-    <div className="bg-background p-6 rounded-xl shadow-lg border border-secondary/10">
-      {memory.filePreview && (
-        <div className="mb-4 rounded-lg overflow-hidden">
-          {memory.file && memory.file.type.startsWith('image/') ? (
-            <img src={memory.filePreview} alt={`${t.memories.altFilePreview} ${memory.name}`} className="w-full h-auto max-h-60 object-cover" />
-          ) : (
-            <video src={memory.filePreview} controls className="w-full h-auto max-h-60"></video>
-          )}
+    <div className="max-w-2xl mx-auto">
+      <div className="text-center mb-12">
+        <h2 className="text-4xl md:text-5xl font-serif font-light text-primary mb-6">{t.memoriesTitle}</h2>
+        <div className="w-20 h-0.5 bg-primary mx-auto mb-8"></div>
+        <p className="text-foreground/80 max-w-xl mx-auto">{t.memoriesDescription}</p>
+      </div>
+
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6 p-6 md:p-8 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl shadow-xl border border-primary/10"
+      >
+        {/* Nom */}
+        <div>
+          <Label htmlFor="memoryName" className="flex items-center mb-3 text-sm font-medium text-foreground">
+            <Heart className="w-4 h-4 mr-2 text-primary" />
+            Votre nom *
+          </Label>
+          <Input
+            id="memoryName"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Votre nom..."
+            required
+            disabled={isUploading}
+            className="bg-background"
+          />
         </div>
-      )}
-      <h4 className="text-lg font-serif text-secondary mb-1">{memory.name}</h4>
-      <p className="text-xs text-muted-foreground mb-3">{formatDate(memory.date)}</p>
-      <p className="text-foreground/80 leading-relaxed whitespace-pre-wrap">{memory.message}</p>
+
+        {/* Message */}
+        <div>
+          <Label htmlFor="memoryMessage" className="flex items-center mb-3 text-sm font-medium text-foreground">
+            <FileText className="w-4 h-4 mr-2 text-primary" />
+            Votre message / Anecdote
+          </Label>
+          <Textarea
+            id="memoryMessage"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Partagez un souvenir, une anecdote... (optionnel)"
+            rows="4"
+            disabled={isUploading}
+            className="bg-background"
+          />
+        </div>
+
+        {/* Sélection de fichiers */}
+        <div>
+          <Label className="flex items-center mb-3 text-sm font-medium text-foreground">
+            <FileText className="w-4 h-4 mr-2 text-primary" />
+            Fichiers ({files.length}/10)
+          </Label>
+          
+          <input
+            ref={fileInputRef}
+            type="file"
+            onChange={handleFileChange}
+            accept={memoriesUploadService.getAcceptedTypes()}
+            capture="environment"
+            multiple
+            className="hidden"
+            disabled={isUploading}
+          />
+          
+          <Button
+            type="button"
+            onClick={handleFileSelect}
+            disabled={isUploading || files.length >= 10}
+            variant="outline"
+            className="w-full h-16 border-2 border-dashed border-primary/30 hover:border-primary/50 bg-background hover:bg-primary/5"
+          >
+            <div className="text-center">
+              <p className="text-sm text-primary/70 font-medium">
+                {files.length >= 10 ? 'Maximum atteint' : 'Sélectionner des fichiers'}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Images, vidéos, audio (max 100 Mo chacun)
+              </p>
+            </div>
+          </Button>
+        </div>
+
+        {/* Liste des fichiers */}
+        {files.length > 0 && (
+          <div className="space-y-3">
+            <Label className="text-sm font-medium text-foreground">
+              Fichiers sélectionnés :
+            </Label>
+            <div className="space-y-2 max-h-60 overflow-y-auto">
+              {files.map((file, index) => (
+                <FileInfo
+                  key={`${file.name}-${file.lastModified}-${index}`}
+                  file={file}
+                  onRemove={removeFile}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Bouton de soumission */}
+        <Button 
+          type="submit" 
+          disabled={isUploading || !name.trim() || files.length === 0}
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group h-12"
+        >
+          {isUploading ? (
+            <>
+              <div className="w-4 h-4 mr-2 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+              Upload en cours...
+            </>
+          ) : (
+            <>
+              Partager le souvenir 
+              <Send className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+            </>
+          )}
+        </Button>
+
+        <p className="text-xs text-muted-foreground text-center mt-4">
+          Vos souvenirs seront conservés privés et accessibles uniquement aux mariés.
+        </p>
+      </form>
     </div>
   );
 };
 
 const Memories = () => {
-  const { toast } = useToast();
   const { language } = useLanguage();
   const t = translations[language];
-
-  const [memories, setMemories] = useState([]);
-
-  useEffect(() => {
-    const storedMemories = JSON.parse(localStorage.getItem('memories') || '[]');
-    setMemories(storedMemories);
-  }, []);
-
-  const addMemory = (newMemory) => {
-    const updatedMemories = [newMemory, ...memories];
-    setMemories(updatedMemories);
-    localStorage.setItem('memories', JSON.stringify(updatedMemories));
-    toast({
-      title: t.memories.memoriesForm.success,
-      description: t.memories.memoriesForm.successMessage,
-    });
-  };
 
   return (
     <section id="memories" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-light text-primary mb-6">{t.memories.memoriesTitle}</h2>
-          <div className="w-20 h-0.5 bg-primary mx-auto mb-8"></div>
-          <p className="text-foreground/80 max-w-xl mx-auto">{t.memories.memoriesDescription}</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          <MemoryForm onAddMemory={addMemory} t={t.memories} />
-          
-          <div className="space-y-6 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
-            {memories.length > 0 ? (
-              memories.map((memory, index) => (
-                <MemoryCard key={index} memory={memory} t={t} />
-              ))
-            ) : (
-              <p className="text-center text-muted-foreground py-8">
-                {t.memories.noMemoriesYet}
-              </p>
-            )}
-          </div>
-        </div>
+        <MemoryForm t={t.memories} />
       </div>
     </section>
   );

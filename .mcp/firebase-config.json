@@ -1,0 +1,37 @@
+{
+  "mcpServers": {
+    "firebase": {
+      "command": "firebase",
+      "args": ["mcp"],
+      "env": {
+        "FIREBASE_PROJECT": "your-project-id"
+      }
+    }
+  },
+  "description": "Configuration MCP Firebase pour le projet matthieu-estelle",
+  "firebase": {
+    "project": "estelle-matthieu",
+    "services": {
+      "firestore": {
+        "enabled": true,
+        "collections": [
+          "rsvps",
+          "memories", 
+          "contacts",
+          "analytics"
+        ]
+      },
+      "storage": {
+        "enabled": true,
+        "buckets": [
+          "memories-photos",
+          "wedding-assets"
+        ]
+      },
+      "auth": {
+        "enabled": true,
+        "providers": ["anonymous"]
+      }
+    }
+  }
+}

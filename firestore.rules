@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Règles pour les RSVP
+    match /rsvps/{document} {
+      allow read, write: if true; // Temporaire - à sécuriser plus tard
+    }
+    
+    // Règles pour les souvenirs (memories)
+    match /memories/{document} {
+      allow read: if resource.data.approved == true;
+      allow write: if true; // Temporaire - à sécuriser plus tard
+    }
+    
+    // Règles pour les messages de contact
+    match /contacts/{document} {
+      allow write: if true; // Permet l'ajout de messages
+      allow read: if false; // Seuls les admins peuvent lire
+    }
+    
+    // Règles pour l'analytics
+    match /analytics/{document} {
+      allow write: if true; // Permet le tracking
+      allow read: if false; // Seuls les admins peuvent lire
+    }
+  }
+}

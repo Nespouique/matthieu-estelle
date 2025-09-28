@@ -1,0 +1,18 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Règles pour les souvenirs - upload public mais lecture privée
+    match /souvenirs/{allPaths=**} {
+      allow write: if request.resource.size < 100 * 1024 * 1024 // Max 100MB
+                   && (request.resource.contentType.matches('(image|video|audio|text)/.*') 
+                       || request.resource.contentType == 'application/json'); // Autoriser JSON pour métadonnées
+      allow read: if false; // Seuls les propriétaires peuvent lire (via console Firebase)
+    }
+    
+    // Règles pour les assets du mariage
+    match /wedding-assets/{allPaths=**} {
+      allow read: if true; // Assets publics
+      allow write: if false; // Seuls les admins peuvent écrire
+    }
+  }
+}
