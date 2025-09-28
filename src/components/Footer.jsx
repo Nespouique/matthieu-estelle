@@ -14,7 +14,7 @@ const Footer = () => {
     <footer className="bg-background border-t border-border py-12 text-center">
       <div className="container mx-auto px-4">
         <div className="flex justify-center mb-6">
-          <Logo />
+          <Logo enableConfetti={true} />
         </div>
         <p className="text-sm text-muted-foreground flex items-center justify-center">
           {t.madeWithLove} <Heart className="w-4 h-4 text-primary mx-1.5" /> {commonT.estelle} & {commonT.matthieu}

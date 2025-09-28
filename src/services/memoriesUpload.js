@@ -80,22 +80,23 @@ export const memoriesUploadService = {
       const results = await Promise.all(uploadPromises);
       console.log('Upload debug - files uploaded:', results.length);
 
-      // Créer le fichier message.txt avec juste le message/anecdote
+      // Créer le fichier message.txt seulement si il y a un message
       const messageContent = message.trim();
-
-      // Upload du fichier message.txt
-      const messagePath = `souvenirs/${folderName}/message.txt`;
-      console.log('Upload debug - message path:', messagePath);
-      const messageRef = ref(storage, messagePath);
-      const messageFile = new Blob([messageContent], { type: 'text/plain' });
-      
-      console.log('Upload debug - uploading message...');
-      try {
-        await uploadBytes(messageRef, messageFile);
-        console.log('Upload debug - message uploaded successfully');
-      } catch (messageError) {
-        console.error('Upload debug - message upload failed:', messageError);
-        throw new Error(`Erreur lors de l'upload du message: ${messageError.message}`);
+      if (messageContent) {
+        // Upload du fichier message.txt
+        const messagePath = `souvenirs/${folderName}/message.txt`;
+        console.log('Upload debug - message path:', messagePath);
+        const messageRef = ref(storage, messagePath);
+        const messageFile = new Blob([messageContent], { type: 'text/plain' });
+        
+        console.log('Upload debug - uploading message...');
+        try {
+          await uploadBytes(messageRef, messageFile);
+          console.log('Upload debug - message uploaded successfully');
+        } catch (messageError) {
+          console.error('Upload debug - message upload failed:', messageError);
+          throw new Error(`Erreur lors de l'upload du message: ${messageError.message}`);
+        }
       }
       
       return {

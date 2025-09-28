@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Send, Heart, FileText, X } from 'lucide-react';
+import { Send, Heart, FileText, X, Mic, Square, Trash2, Files, Edit3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -9,7 +9,147 @@ import { useLanguage } from '@/contexts/LanguageContext.jsx';
 import { translations } from '@/lib/translations';
 import { memoriesUploadService } from '@/services/memoriesUpload';
 
-const FileInfo = ({ file, onRemove }) => {
+  const AudioRecorder = ({ t, onAudioRecorded, audioBlob, onAudioDeleted }) => {
+    const [isRecording, setIsRecording] = useState(false);
+    const [mediaRecorder, setMediaRecorder] = useState(null);
+    const [recordingTime, setRecordingTime] = useState(0);
+    const [audioDuration, setAudioDuration] = useState(0);
+    const intervalRef = useRef(null);
+
+    const startRecording = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const recorder = new MediaRecorder(stream);
+        
+        recorder.ondataavailable = (event) => {
+          if (event.data.size > 0) {
+            const audioBlob = new Blob([event.data], { type: 'audio/webm' });
+            onAudioRecorded(audioBlob);
+          }
+        };
+
+        recorder.onstop = () => {
+          stream.getTracks().forEach(track => track.stop());
+        };
+
+        setMediaRecorder(recorder);
+        recorder.start();
+        setIsRecording(true);
+        setRecordingTime(0);
+        
+        intervalRef.current = setInterval(() => {
+          setRecordingTime(prev => prev + 1);
+        }, 1000);
+
+      } catch (error) {
+        console.error('Erreur microphone:', error);
+      }
+    };
+
+    const stopRecording = () => {
+      if (mediaRecorder && isRecording) {
+        const finalDuration = recordingTime;
+        mediaRecorder.stop();
+        setIsRecording(false);
+        setMediaRecorder(null);
+        setAudioDuration(finalDuration);
+        
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      }
+    };
+
+    const deleteRecording = () => {
+      onAudioDeleted();
+      setRecordingTime(0);
+      setAudioDuration(0);
+    };
+
+    const formatTime = (seconds) => {
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    };
+
+    const WaveAnimation = () => (
+      <div className="flex items-center space-x-1 ml-2">
+        {[...Array(4)].map((_, i) => (
+          <div
+            key={i}
+            className="w-1 bg-primary rounded-full animate-pulse"
+            style={{
+              height: `${8 + Math.sin(Date.now() / 200 + i) * 3}px`,
+              animationDelay: `${i * 0.1}s`,
+              animationDuration: '0.6s'
+            }}
+          />
+        ))}
+      </div>
+    );
+
+    return (
+      <div>
+        <Label className="flex items-center mb-3 text-sm font-medium text-foreground">
+          <Mic className="w-4 h-4 mr-2 text-primary" />
+          {t.audioMessage}
+        </Label>
+        
+        <div className="flex items-center justify-between p-4 border border-primary/20 rounded-lg bg-background">
+          {/* État initial - pas d'enregistrement */}
+          {!isRecording && !audioBlob && (
+            <>
+              <span className="text-sm text-foreground">Démarrer</span>
+              <Button
+                type="button"
+                onClick={startRecording}
+                variant="outline"
+                size="sm"
+                className="w-10 h-10 rounded-full p-0 border-red-300 hover:bg-red-50"
+              >
+                <div className="w-4 h-4 bg-red-500 rounded-full" />
+              </Button>
+            </>
+          )}
+
+          {/* État d'enregistrement */}
+          {isRecording && (
+            <>
+              <div className="flex items-center">
+                <span className="text-sm text-foreground">Enregistrement... {formatTime(recordingTime)}</span>
+                <WaveAnimation />
+              </div>
+              <Button
+                type="button"
+                onClick={stopRecording}
+                variant="outline"
+                size="sm"
+                className="w-10 h-10 rounded-full p-0 border-red-300 hover:bg-red-50"
+              >
+                <Square className="w-4 h-4 fill-red-500 text-red-500" />
+              </Button>
+            </>
+          )}
+
+          {/* État après enregistrement */}
+          {audioBlob && !isRecording && (
+            <>
+              <span className="text-sm text-foreground">Audio enregistré {formatTime(audioDuration)}</span>
+              <Button
+                type="button"
+                onClick={deleteRecording}
+                variant="outline"
+                size="sm"
+                className="w-10 h-10 rounded-full p-0 border-gray-300 hover:bg-gray-50"
+              >
+                <Trash2 className="w-4 h-4 text-gray-500" />
+              </Button>
+            </>
+          )}
+        </div>
+      </div>
+    );
+  };const FileInfo = ({ file, onRemove }) => {
   const formatFileSize = (bytes) => {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
@@ -41,9 +181,18 @@ const MemoryForm = ({ t }) => {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [files, setFiles] = useState([]);
+  const [audioBlob, setAudioBlob] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef(null);
   const { toast } = useToast();
+
+  const handleAudioRecorded = (blob) => {
+    setAudioBlob(blob);
+  };
+
+  const handleAudioDeleted = () => {
+    setAudioBlob(null);
+  };
 
   const handleFileSelect = () => {
     fileInputRef.current?.click();
@@ -56,7 +205,7 @@ const MemoryForm = ({ t }) => {
     const errors = memoriesUploadService.validateFiles(selectedFiles);
     if (errors.length > 0) {
       toast({
-        title: t.memories.validationError,
+        title: t.validationError,
         description: errors.join(', '),
         variant: "destructive"
       });
@@ -82,17 +231,8 @@ const MemoryForm = ({ t }) => {
     
     if (!name.trim()) {
       toast({
-        title: t.memories.error,
-        description: t.memories.nameRequired,
-        variant: "destructive"
-      });
-      return;
-    }
-
-    if (files.length === 0) {
-      toast({
-        title: t.memories.error, 
-        description: t.memories.filesRequired,
+        title: t.error,
+        description: t.nameRequired,
         variant: "destructive"
       });
       return;
@@ -101,11 +241,16 @@ const MemoryForm = ({ t }) => {
     setIsUploading(true);
 
     try {
-      const result = await memoriesUploadService.uploadMemories(files, name.trim(), message.trim());
+      // Préparer les fichiers pour l'upload (inclure l'audio si présent)
+      const allFiles = audioBlob 
+        ? [...files, new File([audioBlob], `message-audio-${Date.now()}.webm`, { type: 'audio/webm' })]
+        : [...files];
+
+      const result = await memoriesUploadService.uploadMemories(allFiles, name.trim(), message.trim());
       
       toast({
-        title: t.memories.uploadSuccess,
-        description: `${result.filesUploaded} ${t.memories.uploadSuccessDescription}`,
+        title: t.uploadSuccess,
+        description: `${result.filesUploaded} ${t.uploadSuccessDescription}`,
         className: "border-green-200 bg-green-50",
         style: {
           borderColor: "#bbf7d0",
@@ -118,10 +263,11 @@ const MemoryForm = ({ t }) => {
       setName('');
       setMessage('');
       setFiles([]);
+      setAudioBlob(null);
       
     } catch (error) {
       toast({
-        title: t.memories.uploadError,
+        title: t.uploadError,
         description: error.message,
         variant: "destructive"
       });
@@ -163,7 +309,7 @@ const MemoryForm = ({ t }) => {
         {/* Message */}
         <div>
           <Label htmlFor="memoryMessage" className="flex items-center mb-3 text-sm font-medium text-foreground">
-            <FileText className="w-4 h-4 mr-2 text-primary" />
+            <Edit3 className="w-4 h-4 mr-2 text-primary" />
             Votre message / Anecdote
           </Label>
           <Textarea
@@ -177,10 +323,18 @@ const MemoryForm = ({ t }) => {
           />
         </div>
 
+        {/* Message audio */}
+        <AudioRecorder 
+          t={t}
+          onAudioRecorded={handleAudioRecorded}
+          audioBlob={audioBlob}
+          onAudioDeleted={handleAudioDeleted}
+        />
+
         {/* Sélection de fichiers */}
         <div>
           <Label className="flex items-center mb-3 text-sm font-medium text-foreground">
-            <FileText className="w-4 h-4 mr-2 text-primary" />
+            <Files className="w-4 h-4 mr-2 text-primary" />
             Fichiers ({files.length}/10)
           </Label>
           
@@ -234,7 +388,7 @@ const MemoryForm = ({ t }) => {
         {/* Bouton de soumission */}
         <Button 
           type="submit" 
-          disabled={isUploading || !name.trim() || files.length === 0}
+          disabled={isUploading || !name.trim()}
           className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group h-12"
         >
           {isUploading ? (
