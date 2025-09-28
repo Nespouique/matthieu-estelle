@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { User, AtSign, Users, CalendarCheck, WheatOff, Send, Plus, Minus, Loader2, CheckCircle, XCircle } from "lucide-react";
+import { User, AtSign, Users, CalendarCheck, WheatOff, Send, Plus, Minus, Loader2, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -75,6 +75,7 @@ const RSVP = () => {
   const [email, setEmail] = useState("");
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [attendanceEvents, setAttendanceEvents] = useState([]);
+  const [cannotAttend, setCannotAttend] = useState(false);
   const [dietaryRestrictions, setDietaryRestrictions] = useState("");
   
   // Submission states
@@ -91,6 +92,13 @@ const RSVP = () => {
 
   // Handle checkbox changes for events
   const handleEventChange = (eventId) => {
+    if (cannotAttend) return; // Ne pas permettre de sélectionner des événements si "ne peut pas venir" est coché
+    
+    // Si on sélectionne un événement, désactiver "ne peut pas venir"
+    if (!attendanceEvents.includes(eventId)) {
+      setCannotAttend(false);
+    }
+    
     setAttendanceEvents(prev => 
       prev.includes(eventId) 
         ? prev.filter(id => id !== eventId)
@@ -98,12 +106,21 @@ const RSVP = () => {
     );
   };
 
+  // Handle "cannot attend" checkbox
+  const handleCannotAttendChange = (checked) => {
+    setCannotAttend(checked);
+    if (checked) {
+      // Clear all events if user cannot attend
+      setAttendanceEvents([]);
+    }
+  };
+
   // Check if form is valid
   const isFormValid = () => {
     return fullName.trim() && 
            email.trim() && 
            numberOfGuests >= 1 && 
-           attendanceEvents.length > 0;
+           (attendanceEvents.length > 0 || cannotAttend);
   };
 
   // Handle form submission via URL parameters (GET method for testing)
@@ -119,7 +136,7 @@ const RSVP = () => {
         fullName: fullName.trim(),
         email: email.trim(),
         guestsCount: numberOfGuests.toString(),
-        attendance: attendanceEvents.join(', '),
+        attendance: cannotAttend ? 'cannotAttend' : attendanceEvents.join(', '),
         diet: dietaryRestrictions.trim()
       });
 
@@ -148,12 +165,24 @@ const RSVP = () => {
           }
         });
         
+        // Scroll to memories section after successful submission
+        setTimeout(() => {
+          const memoriesSection = document.getElementById('memories');
+          if (memoriesSection) {
+            memoriesSection.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }, 1500);
+        
         // Reset form after a delay
         setTimeout(() => {
           setFullName("");
           setEmail("");
           setNumberOfGuests(1);
           setAttendanceEvents([]);
+          setCannotAttend(false);
           setDietaryRestrictions("");
           setIsSubmitted(false);
         }, 3000);
@@ -257,19 +286,46 @@ const RSVP = () => {
                     <input
                       type="checkbox"
                       id={event.id}
-                      checked={attendanceEvents.includes(event.id)}
+                      checked={attendanceEvents.includes(event.id) && !cannotAttend}
                       onChange={() => handleEventChange(event.id)}
-                      className="w-4 h-4 text-primary border-input rounded focus:ring-primary focus:ring-2 accent-primary"
+                      disabled={cannotAttend}
+                      className="w-4 h-4 text-primary border-input rounded focus:ring-primary focus:ring-2 accent-primary disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <Label 
                       htmlFor={event.id} 
-                      className="flex-1 cursor-pointer text-sm font-medium text-foreground hover:text-primary transition-colors"
+                      className={`flex-1 cursor-pointer text-sm font-medium transition-colors ${
+                        cannotAttend 
+                          ? 'text-foreground/50 cursor-not-allowed' 
+                          : 'text-foreground hover:text-primary'
+                      }`}
                     >
                       <span className="font-semibold">{event.label}</span>
                       <span className="text-foreground/60 ml-2">({event.date})</span>
                     </Label>
                   </div>
                 ))}
+                
+                {/* Séparateur */}
+                <div className="border-t border-foreground/20 my-4"></div>
+                
+                {/* Option "ne peut pas venir" */}
+                <div className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    id="cannotAttend"
+                    checked={cannotAttend}
+                    onChange={(e) => handleCannotAttendChange(e.target.checked)}
+                    className="w-4 h-4 text-primary border-input rounded focus:ring-primary focus:ring-2 accent-primary"
+                  />
+                  <Label 
+                    htmlFor="cannotAttend" 
+                    className="flex-1 cursor-pointer text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  >
+                    <span className="font-semibold">
+                      {t.rsvpForm.cannotAttend}
+                    </span>
+                  </Label>
+                </div>
               </div>
             </div>
 

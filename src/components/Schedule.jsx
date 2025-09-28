@@ -39,18 +39,19 @@ const Schedule = () => {
           <div className="w-20 h-0.5 bg-primary mx-auto"></div>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
+        <div className="relative max-w-6xl mx-auto">
           {/* Trait de connexion horizontal - visible uniquement sur desktop */}
-          <div className="hidden md:block absolute left-0 right-0 h-1 bg-primary/40 z-0" style={{ top: '5rem' }}></div>
+          <div className="hidden md:block absolute left-0 right-0 h-1 bg-primary/40 z-0" style={{ top: '50%', transform: 'translateY(-50%)' }}></div>
           
           {/* Trait de connexion vertical - visible uniquement sur mobile */}
           <div className="md:hidden absolute left-1/2 transform -translate-x-1/2 w-1 bg-primary/40 z-0" style={{ top: '6rem', bottom: '6rem' }}></div>
           
-          <div className="relative space-y-8 z-10">
+          {/* Layout mobile : vertical */}
+          <div className="relative md:hidden space-y-8 z-10">
             {scheduleItems.map((item, index) => (
               <div
                 key={index}
-                className="bg-white bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl shadow-lg border border-primary/10 hover:shadow-primary/20 transition-shadow p-6 md:p-8"
+                className="bg-white bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl shadow-lg border border-primary/10 hover:shadow-primary/20 transition-shadow p-6"
               >
                 <div className="flex items-center mb-4">
                   <div className="mr-4 p-3 bg-primary/10 rounded-full">
@@ -71,6 +72,39 @@ const Schedule = () => {
                       {time.includes(' - ') && <span> - {time.split(' - ')[1]}</span>}
                     </p>
                   ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Layout desktop : horizontal */}
+          <div className="hidden md:flex md:justify-between md:items-center relative z-10 gap-8">
+            {scheduleItems.map((item, index) => (
+              <div
+                key={index}
+                className="flex-1 bg-white bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl shadow-lg border border-primary/10 hover:shadow-primary/20 transition-shadow p-6 lg:p-8 relative"
+              >
+                <div className="text-center">
+                  <div className="mb-4 flex justify-center">
+                    <div className="p-3 bg-primary/10 rounded-full">
+                      {item.icon}
+                    </div>
+                  </div>
+                  <div className="mb-6">
+                    <h3 className="text-xl lg:text-2xl font-serif text-primary font-semibold mb-2">{item.title}</h3>
+                    {item.location && (
+                      <p className="text-sm text-secondary font-medium mb-1">{item.location}</p>
+                    )}
+                    <p className="text-sm text-foreground/70 font-medium">{item.date}</p>
+                  </div>
+                  <div className="space-y-2">
+                    {item.times.map((time, timeIndex) => (
+                      <p key={timeIndex} className="text-foreground/80 text-sm leading-relaxed">
+                        <span className="font-bold">{time.split(' - ')[0]}</span>
+                        {time.includes(' - ') && <span> - {time.split(' - ')[1]}</span>}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}

@@ -1,6 +1,6 @@
 export const memoriesEn = {
   memoriesTitle: "Share Your Memories",
-  memoriesDescription: "Help us capture all the precious moments! Share your photos, videos, or a sweet message from our special day.",
+  memoriesDescription: "From now on, share your memories with the future newlyweds, in photos, videos, and messages.",
   memoriesForm: {
     name: "Your Name",
     namePlaceholder: "Your name",

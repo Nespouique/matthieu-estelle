@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapPin, Plane, Book, ChevronDown, ChevronUp, School, Home as HomeIcon, Castle, Hotel } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext.jsx';
 import { translations } from '@/lib/translations';
@@ -7,6 +7,22 @@ const Venue = () => {
   const { language } = useLanguage();
   const t = translations[language].venue;
   const [isTravelInfoOpen, setIsTravelInfoOpen] = useState(false);
+
+  // Ouvrir l'accordéon par défaut sur desktop
+  useEffect(() => {
+    const checkScreenSize = () => {
+      if (window.innerWidth >= 768) { // md breakpoint
+        setIsTravelInfoOpen(true);
+      } else {
+        setIsTravelInfoOpen(false);
+      }
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const venues = [
     {

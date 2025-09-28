@@ -1,6 +1,6 @@
 export const memoriesFr = {
   memoriesTitle: "Partagez Vos Souvenirs",
-  memoriesDescription: "Aidez-nous à immortaliser tous les moments précieux ! Partagez vos photos, vidéos, ou un message affectueux de notre journée spéciale.",
+  memoriesDescription: "Dès à présent, partagez vos souvenirs avec les futurs mariés, en photos, vidéos et messages.",
   memoriesForm: {
     name: "Votre Nom",
     namePlaceholder: "Votre nom",
