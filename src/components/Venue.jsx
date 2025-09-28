@@ -55,8 +55,8 @@ const Venue = () => {
   ];
 
   return (
-    <section id="venue" className="py-20 bg-gradient-to-br from-secondary/5 via-transparent to-primary/5">
-      <div className="container mx-auto px-4">
+    <section id="venue" className="py-20 section-darker section-transition">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-light text-primary mb-6">{t.venueTitle}</h2>
           <div className="w-20 h-0.5 bg-primary mx-auto mb-8"></div>
@@ -82,8 +82,8 @@ const Venue = () => {
                 className="flex items-center justify-between w-full text-left"
               >
                 <div className="flex items-center">
-                  <Plane className="w-7 h-7 text-secondary mr-3" />
-                  <h3 className="text-2xl font-serif text-secondary">{t.travelInfo.title}</h3>
+                  <Plane className="w-7 h-7 text-primary mr-3" />
+                  <h3 className="text-2xl font-serif text-primary font-semibold">{t.travelInfo.title}</h3>
                 </div>
                 {isTravelInfoOpen ? (
                   <ChevronUp className="w-5 h-5 text-secondary transition-transform duration-200" />
@@ -113,23 +113,23 @@ const Venue = () => {
         <div className="mb-16">
           <div className="p-6 bg-background rounded-xl shadow-lg border border-secondary/10">
             <div className="flex items-center mb-6">
-              <MapPin className="w-7 h-7 text-secondary mr-3" />
-              <h3 className="text-2xl font-serif text-secondary">{t.venues.title}</h3>
+              <MapPin className="w-7 h-7 text-primary mr-3" />
+              <h3 className="text-2xl font-serif text-primary font-semibold">{t.venues.title}</h3>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {venues.map((venue, index) => {
                 const IconComponent = venue.icon;
                 return (
-                  <div key={index} className="p-4 bg-secondary/5 rounded-lg border border-secondary/10">
-                    <h4 className="text-lg font-serif text-secondary mb-2 flex items-center">
-                      <IconComponent className="w-5 h-5 text-secondary mr-2" />
+                  <div key={index} className="p-4 bg-secondary/25 rounded-lg border border-secondary/30">
+                    <h4 className="text-lg font-serif text-foreground/80 mb-2 flex items-center">
+                      <IconComponent className="w-5 h-5 text-foreground/80 mr-2" />
                       {venue.name}
                     </h4>
                   <a 
                     href={venue.mapsLink} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-foreground/80 mb-2 text-sm hover:text-primary transition-colors block underline"
+                    className="text-foreground mb-2 text-sm hover:text-primary transition-colors block underline"
                   >
                     {venue.address}
                   </a>
@@ -198,8 +198,8 @@ const Venue = () => {
         <div className="mb-16">
           <div className="p-6 bg-background rounded-xl shadow-lg border border-secondary/10">
             <div className="flex items-center mb-4">
-              <Hotel className="w-7 h-7 text-secondary mr-3" />
-              <h3 className="text-2xl font-serif text-secondary">{t.accommodation.title}</h3>
+              <Hotel className="w-7 h-7 text-primary mr-3" />
+              <h3 className="text-2xl font-serif text-primary font-semibold">{t.accommodation.title}</h3>
             </div>
             <p className="text-foreground/80 mb-6">{t.accommodation.description}</p>
             <div className="grid md:grid-cols-3 gap-4">
@@ -218,8 +218,8 @@ const Venue = () => {
         <div>
           <div className="p-6 bg-background rounded-xl shadow-lg border border-secondary/10">
             <div className="flex items-center mb-6">
-              <Book className="w-7 h-7 text-secondary mr-3" />
-              <h3 className="text-2xl font-serif text-secondary">{t.ourGuide.title}</h3>
+              <Book className="w-7 h-7 text-primary mr-3" />
+              <h3 className="text-2xl font-serif text-primary font-semibold">{t.ourGuide.title}</h3>
             </div>
             <div className="mb-6">
               {t.ourGuide.description.split('\n\n').map((paragraph, index) => (
@@ -230,8 +230,8 @@ const Venue = () => {
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {t.ourGuide.places.map((place, index) => (
-                <div key={index} className="p-4 bg-secondary/5 rounded-lg border border-secondary/10">
-                  <h4 className="text-lg font-serif text-secondary mb-3">{place.name}</h4>
+                <div key={index} className="p-4 bg-secondary/25 rounded-lg border border-secondary/30">
+                  <h4 className="text-lg font-serif text-foreground/80 mb-3">{place.name}</h4>
                   {/* Image du lieu */}
                   {place.image && (
                     <div className="mb-4 rounded-lg overflow-hidden">
@@ -247,7 +247,7 @@ const Venue = () => {
                     href={place.mapsLink} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-foreground/80 text-sm hover:text-primary transition-colors underline block"
+                    className="text-foreground text-sm hover:text-primary transition-colors underline block"
                   >
                     {place.address}
                   </a>

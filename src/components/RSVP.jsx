@@ -212,8 +212,8 @@ const RSVP = () => {
   };
 
   return (
-    <section id="rsvp" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+        <section id="rsvp" className="py-20 section-darker section-transition">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-serif font-light text-primary mb-6">
             {t.rsvpTitle}

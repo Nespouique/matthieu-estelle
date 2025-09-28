@@ -5,33 +5,42 @@
 
 @layer base {
   :root {
-    --background: 36 33% 97%;
-    --foreground: 36 10% 15%;
+    /* Couleurs principales basées sur la nouvelle palette */
+    --background: 35 3% 96%;
+    --foreground: 59 23% 45%;
     
-    --card: 36 33% 97%;
-    --card-foreground: 36 10% 15%;
+    /* Cards avec un fond légèrement plus foncé que le background */
+    --card: 35 5% 94%;
+    --card-foreground: 59 23% 45%;
     
-    --popover: 36 33% 97%;
-    --popover-foreground: 36 10% 15%;
+    /* Popovers */
+    --popover: 35 3% 96%;
+    --popover-foreground: 59 23% 45%;
     
-    --primary: 36 40% 45%;
-    --primary-foreground: 36 33% 97%;
+    /* Couleur primaire dérivée du text primary avec plus de saturation */
+    --primary: 59 35% 40%;
+    --primary-foreground: 35 3% 96%;
     
-    --secondary: 200 40% 45%;
-    --secondary-foreground: 36 33% 97%;
+    /* Couleur secondaire complémentaire */
+    --secondary: 35 15% 88%;
+    --secondary-foreground: 59 23% 45%;
     
-    --muted: 36 10% 90%;
-    --muted-foreground: 36 10% 40%;
+    /* Couleurs atténuées */
+    --muted: 35 8% 88%;
+    --muted-foreground: 59 15% 60%;
     
-    --accent: 200 40% 45%;
-    --accent-foreground: 36 33% 97%;
+    /* Accent similaire au primary mais plus clair */
+    --accent: 59 25% 50%;
+    --accent-foreground: 35 3% 96%;
     
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 36 33% 97%;
+    /* Couleur destructive (rouge) */
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 35 3% 96%;
     
-    --border: 36 10% 85%;
-    --input: 36 10% 85%;
-    --ring: 36 40% 45%;
+    /* Bordures et inputs */
+    --border: 35 8% 85%;
+    --input: 35 8% 90%;
+    --ring: 59 35% 40%;
     
     --radius: 0.5rem;
   }
@@ -47,5 +56,26 @@
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garamond', serif;
+  }
+}
+
+@layer components {
+  /* Sections avec background clair */
+  .section-light {
+    @apply bg-background;
+  }
+  
+  /* Sections avec background moins clair (plus de couleur) */
+  .section-darker {
+    background: linear-gradient(to bottom right, 
+      hsl(var(--primary) / 0.06), 
+      hsl(var(--secondary) / 0.04), 
+      hsl(var(--primary) / 0.08)
+    );
+  }
+  
+  /* Transition douce entre les sections */
+  .section-transition {
+    @apply transition-all duration-500 ease-in-out;
   }
 }

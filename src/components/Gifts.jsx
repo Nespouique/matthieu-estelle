@@ -11,8 +11,8 @@ const Gifts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <section id="gifts" className="py-20 bg-gradient-to-br from-secondary/5 via-transparent to-primary/5">
-      <div className="container mx-auto px-4">
+    <section id="gifts" className="py-20 section-darker section-transition">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-serif font-light text-primary mb-6">{t.giftsTitle}</h2>
           <div className="w-20 h-0.5 bg-primary mx-auto mb-8"></div>

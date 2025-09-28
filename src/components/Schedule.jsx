@@ -32,8 +32,10 @@ const Schedule = () => {
   ];
 
   return (
-    <section id="schedule" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="schedule" className="py-20 section-light section-transition">
+      {/* Overlay subtil pour accentuer la séparation */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-transparent"></div>
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-light text-primary mb-6">{t.scheduleTitle}</h2>
           <div className="w-20 h-0.5 bg-primary mx-auto"></div>

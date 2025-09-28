@@ -13,8 +13,8 @@ const DressCode = () => {
   };
 
   return (
-    <section id="dresscode" className="py-20 bg-gradient-to-br from-secondary/5 via-transparent to-primary/5">
-      <div className="container mx-auto px-4">
+    <section id="dresscode" className="py-20 section-light section-transition">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12 max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-serif font-light text-primary mb-6">{t.faqTitle}</h2>
           <div className="w-20 h-0.5 bg-primary mx-auto mb-8"></div>
@@ -28,13 +28,13 @@ const DressCode = () => {
                 className="flex items-center justify-between w-full p-6 text-left"
               >
                 <div className="flex items-center">
-                  <HelpCircle className="w-6 h-6 text-secondary mr-3 flex-shrink-0" />
-                  <h3 className="text-lg font-serif text-secondary">{faq.question}</h3>
+                  <HelpCircle className="w-6 h-6 text-primary mr-3 flex-shrink-0" />
+                  <h3 className="text-lg font-serif text-primary">{faq.question}</h3>
                 </div>
                 {openFaq === index ? (
-                  <ChevronUp className="w-5 h-5 text-secondary transition-transform duration-200 flex-shrink-0" />
+                  <ChevronUp className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-secondary transition-transform duration-200 flex-shrink-0" />
+                  <ChevronDown className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
                 )}
               </button>
               
@@ -70,7 +70,7 @@ const DressCode = () => {
                                 href={`https://wa.me/33${line.split('+33')[1]?.trim().replace(/\s/g, '').replace(/^0/, '')}`}
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="text-primary hover:underline font-medium ml-1"
+                                className="text-primary underline hover:no-underline font-medium ml-1"
                               >
                                 +33{line.split('+33')[1]?.trim()}
                               </a>
@@ -81,7 +81,7 @@ const DressCode = () => {
                               {line.split('112')[0]}
                               <a 
                                 href="tel:112"
-                                className="text-primary hover:underline font-medium"
+                                className="text-primary underline hover:no-underline font-medium"
                               >
                                 112
                               </a>

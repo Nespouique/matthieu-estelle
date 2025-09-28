@@ -421,8 +421,8 @@ const Memories = () => {
   const t = translations[language];
 
   return (
-    <section id="memories" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="memories" className="py-20 section-light section-transition">
+      <div className="container mx-auto px-4 relative z-10">
         <MemoryForm t={t.memories} />
       </div>
     </section>

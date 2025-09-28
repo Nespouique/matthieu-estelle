@@ -10,7 +10,7 @@ const Footer = () => {
   const commonT = translations[language].common;
 
   return (
-    <footer className="bg-background border-t border-border py-12 text-center">
+    <footer className="section-light border-t border-border/50 py-12 text-center">
       <div className="container mx-auto px-4">
         <div className="flex justify-center mb-6">
           <Logo enableConfetti={true} />

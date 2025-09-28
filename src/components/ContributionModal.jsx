@@ -64,8 +64,8 @@ const ContributionModal = ({ isOpen, onClose, translations }) => {
         {/* Content */}
         <div className="space-y-6">
           {/* SEPA Transfer */}
-          <div className="bg-secondary/5 border border-secondary/10 rounded-xl p-6">
-            <h3 className="text-xl font-serif text-secondary mb-4">
+          <div className="bg-secondary/25 border border-secondary/30 rounded-xl p-6">
+            <h3 className="text-xl font-serif text-primary mb-4">
               {translations.modal.sepaTitle}
             </h3>
             
@@ -109,8 +109,8 @@ const ContributionModal = ({ isOpen, onClose, translations }) => {
           </div>
 
           {/* Revolut */}
-          <div className="bg-secondary/5 border border-secondary/10 rounded-xl p-6">
-            <h3 className="text-xl font-serif text-secondary mb-4">
+          <div className="bg-secondary/25 border border-secondary/30 rounded-xl p-6">
+            <h3 className="text-xl font-serif text-primary mb-4">
               {translations.modal.revolutTitle}
             </h3>
             <button
@@ -122,8 +122,8 @@ const ContributionModal = ({ isOpen, onClose, translations }) => {
           </div>
 
           {/* Physical contribution */}
-          <div className="bg-secondary/5 border border-secondary/10 rounded-xl p-6">
-            <h3 className="text-xl font-serif text-secondary mb-4">
+          <div className="bg-secondary/25 border border-secondary/30 rounded-xl p-6">
+            <h3 className="text-xl font-serif text-primary mb-4">
               {translations.modal.urneTitle}
             </h3>
             <p className="text-foreground/80 leading-relaxed">
