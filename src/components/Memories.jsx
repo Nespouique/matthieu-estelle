@@ -15,6 +15,7 @@ import { memoriesUploadService } from '@/services/memoriesUpload';
     const [recordingTime, setRecordingTime] = useState(0);
     const [audioDuration, setAudioDuration] = useState(0);
     const intervalRef = useRef(null);
+    const { toast } = useToast();
 
     const startRecording = async () => {
       try {
@@ -40,9 +41,12 @@ import { memoriesUploadService } from '@/services/memoriesUpload';
         intervalRef.current = setInterval(() => {
           setRecordingTime(prev => prev + 1);
         }, 1000);
-
       } catch (error) {
-        console.error('Erreur microphone:', error);
+        toast({
+          title: "Erreur microphone",
+          description: "Impossible d'accéder au microphone. Vérifiez les permissions.",
+          variant: "destructive"
+        });
       }
     };
 

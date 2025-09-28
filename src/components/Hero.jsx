@@ -51,7 +51,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
+    <section id="hero" className="relative h-[calc(100vh-4rem)] flex items-center justify-center text-center text-white overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
           alt={images[currentImageIndex].description}
