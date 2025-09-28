@@ -16,4 +16,22 @@ export const memoriesFr = {
   audioRecorded: "Audio enregistré",
   microphoneError: "Erreur d'accès au microphone",
   microphoneErrorDesc: "Impossible d'accéder au microphone. Vérifiez les permissions.",
+  // Nouveaux labels pour les champs
+  yourName: "Votre nom *",
+  yourNamePlaceholder: "Votre nom...",
+  yourMessage: "Votre message / Anecdote",
+  yourMessagePlaceholder: "Partagez un souvenir, une anecdote... (optionnel)",
+  files: "Fichiers",
+  selectFiles: "Sélectionner des fichiers",
+  maxReached: "Maximum atteint",
+  fileTypes: "Images, vidéos, audio (max 100 Mo chacun)",
+  selectedFiles: "Fichiers sélectionnés :",
+  sharing: "Partage en cours...",
+  shareMemory: "Partager le souvenir",
+  // Labels pour l'enregistreur audio
+  startRecorderButton: "Démarrer l'enregistrement",
+  recordingStatus: "Enregistrement...",
+  audioRecordedStatus: "Audio enregistré",
+  // Note de confidentialité
+  privacyNote: "Vos souvenirs seront conservés privés et accessibles uniquement aux mariés."
 };

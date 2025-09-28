@@ -60,7 +60,7 @@ const Schedule = () => {
                     {item.icon}
                   </div>
                   <div>
-                    <h3 className="text-2xl font-serif text-primary font-semibold">{item.title}</h3>
+                    <h3 className="text-xl text-primary font-semibold">{item.title}</h3>
                     {item.location && (
                       <p className="text-sm text-secondary font-medium mb-1">{item.location}</p>
                     )}
@@ -93,7 +93,7 @@ const Schedule = () => {
                     </div>
                   </div>
                   <div className="mb-6">
-                    <h3 className="text-xl lg:text-2xl font-serif text-primary font-semibold mb-2">{item.title}</h3>
+                    <h3 className="text-xl lg:text-2xl text-primary font-semibold mb-2">{item.title}</h3>
                     {item.location && (
                       <p className="text-sm text-secondary font-medium mb-1">{item.location}</p>
                     )}

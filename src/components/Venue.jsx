@@ -7,14 +7,17 @@ const Venue = () => {
   const { language } = useLanguage();
   const t = translations[language].venue;
   const [isTravelInfoOpen, setIsTravelInfoOpen] = useState(false);
+  const [userHasInteracted, setUserHasInteracted] = useState(false);
 
-  // Ouvrir l'accordéon par défaut sur desktop
+  // Ouvrir l'accordéon par défaut sur desktop seulement si l'utilisateur n'a pas encore interagi
   useEffect(() => {
     const checkScreenSize = () => {
-      if (window.innerWidth >= 768) { // md breakpoint
-        setIsTravelInfoOpen(true);
-      } else {
-        setIsTravelInfoOpen(false);
+      if (!userHasInteracted) {
+        if (window.innerWidth >= 768) { // md breakpoint
+          setIsTravelInfoOpen(true);
+        } else {
+          setIsTravelInfoOpen(false);
+        }
       }
     };
 
@@ -22,7 +25,12 @@ const Venue = () => {
     window.addEventListener('resize', checkScreenSize);
 
     return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
+  }, [userHasInteracted]);
+
+  const toggleTravelInfo = () => {
+    setUserHasInteracted(true);
+    setIsTravelInfoOpen(!isTravelInfoOpen);
+  };
 
   const venues = [
     {
@@ -78,17 +86,17 @@ const Venue = () => {
           <div className="space-y-6">
             <div className="p-6 bg-background rounded-xl shadow-lg border border-secondary/10">
               <button
-                onClick={() => setIsTravelInfoOpen(!isTravelInfoOpen)}
+                onClick={toggleTravelInfo}
                 className="flex items-center justify-between w-full text-left"
               >
                 <div className="flex items-center">
                   <Plane className="w-7 h-7 text-primary mr-3" />
-                  <h3 className="text-2xl font-serif text-primary font-semibold">{t.travelInfo.title}</h3>
+                  <h3 className="text-xl text-primary font-semibold">{t.travelInfo.title}</h3>
                 </div>
                 {isTravelInfoOpen ? (
-                  <ChevronUp className="w-5 h-5 text-secondary transition-transform duration-200" />
+                  <ChevronUp className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-secondary transition-transform duration-200" />
+                  <ChevronDown className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
                 )}
               </button>
               
@@ -114,14 +122,14 @@ const Venue = () => {
           <div className="p-6 bg-background rounded-xl shadow-lg border border-secondary/10">
             <div className="flex items-center mb-6">
               <MapPin className="w-7 h-7 text-primary mr-3" />
-              <h3 className="text-2xl font-serif text-primary font-semibold">{t.venues.title}</h3>
+              <h3 className="text-xl text-primary font-semibold">{t.venues.title}</h3>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {venues.map((venue, index) => {
                 const IconComponent = venue.icon;
                 return (
                   <div key={index} className="p-4 bg-secondary/25 rounded-lg border border-secondary/30">
-                    <h4 className="text-lg font-serif text-foreground/80 mb-2 flex items-center">
+                    <h4 className="text-lg text-foreground/80 mb-2 flex items-center">
                       <IconComponent className="w-5 h-5 text-foreground/80 mr-2" />
                       {venue.name}
                     </h4>
@@ -199,12 +207,12 @@ const Venue = () => {
           <div className="p-6 bg-background rounded-xl shadow-lg border border-secondary/10">
             <div className="flex items-center mb-4">
               <Hotel className="w-7 h-7 text-primary mr-3" />
-              <h3 className="text-2xl font-serif text-primary font-semibold">{t.accommodation.title}</h3>
+              <h3 className="text-xl text-primary font-semibold">{t.accommodation.title}</h3>
             </div>
             <p className="text-foreground/80 mb-6">{t.accommodation.description}</p>
             <div className="grid md:grid-cols-3 gap-4">
               {t.accommodation.options.map((option, index) => (
-                <div key={index} className="p-4 border border-secondary/20 rounded-lg">
+                <div key={index} className="p-4 bg-secondary/25 rounded-lg border border-secondary/30">
                   <h5 className="font-semibold text-secondary mb-1">{option.name}</h5>
                   <p className="text-sm text-foreground/70 mb-1">{option.address}</p>
                   <p className="text-sm text-foreground/80 font-medium">{option.price}</p>
@@ -219,7 +227,7 @@ const Venue = () => {
           <div className="p-6 bg-background rounded-xl shadow-lg border border-secondary/10">
             <div className="flex items-center mb-6">
               <Book className="w-7 h-7 text-primary mr-3" />
-              <h3 className="text-2xl font-serif text-primary font-semibold">{t.ourGuide.title}</h3>
+              <h3 className="text-xl text-primary font-semibold">{t.ourGuide.title}</h3>
             </div>
             <div className="mb-6">
               {t.ourGuide.description.split('\n\n').map((paragraph, index) => (
@@ -231,7 +239,7 @@ const Venue = () => {
             <div className="grid md:grid-cols-3 gap-6">
               {t.ourGuide.places.map((place, index) => (
                 <div key={index} className="p-4 bg-secondary/25 rounded-lg border border-secondary/30">
-                  <h4 className="text-lg font-serif text-foreground/80 mb-3">{place.name}</h4>
+                  <h4 className="text-lg text-foreground/80 mb-3">{place.name}</h4>
                   {/* Image du lieu */}
                   {place.image && (
                     <div className="mb-4 rounded-lg overflow-hidden">

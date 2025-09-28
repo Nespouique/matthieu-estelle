@@ -43,8 +43,8 @@ import { memoriesUploadService } from '@/services/memoriesUpload';
         }, 1000);
       } catch (error) {
         toast({
-          title: "Erreur microphone",
-          description: "Impossible d'accéder au microphone. Vérifiez les permissions.",
+          title: t.microphoneError,
+          description: t.microphoneErrorDesc,
           variant: "destructive"
         });
       }
@@ -103,7 +103,7 @@ import { memoriesUploadService } from '@/services/memoriesUpload';
           {/* État initial - pas d'enregistrement */}
           {!isRecording && !audioBlob && (
             <>
-              <span className="text-sm text-foreground">Démarrer</span>
+              <span className="text-sm text-foreground">{t.startRecorderButton}</span>
               <Button
                 type="button"
                 onClick={startRecording}
@@ -120,7 +120,7 @@ import { memoriesUploadService } from '@/services/memoriesUpload';
           {isRecording && (
             <>
               <div className="flex items-center">
-                <span className="text-sm text-foreground">Enregistrement... {formatTime(recordingTime)}</span>
+                <span className="text-sm text-foreground">{t.recordingStatus} {formatTime(recordingTime)}</span>
                 <WaveAnimation />
               </div>
               <Button
@@ -138,7 +138,7 @@ import { memoriesUploadService } from '@/services/memoriesUpload';
           {/* État après enregistrement */}
           {audioBlob && !isRecording && (
             <>
-              <span className="text-sm text-foreground">Audio enregistré {formatTime(audioDuration)}</span>
+              <span className="text-sm text-foreground">{t.audioRecordedStatus} {formatTime(audioDuration)}</span>
               <Button
                 type="button"
                 onClick={deleteRecording}
@@ -296,14 +296,14 @@ const MemoryForm = ({ t }) => {
         <div>
           <Label htmlFor="memoryName" className="flex items-center mb-3 text-sm font-medium text-foreground">
             <Heart className="w-4 h-4 mr-2 text-primary" />
-            Votre nom *
+            {t.yourName}
           </Label>
           <Input
             id="memoryName"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Votre nom..."
+            placeholder={t.yourNamePlaceholder}
             required
             disabled={isUploading}
             className="bg-background"
@@ -314,13 +314,13 @@ const MemoryForm = ({ t }) => {
         <div>
           <Label htmlFor="memoryMessage" className="flex items-center mb-3 text-sm font-medium text-foreground">
             <Edit3 className="w-4 h-4 mr-2 text-primary" />
-            Votre message / Anecdote
+            {t.yourMessage}
           </Label>
           <Textarea
             id="memoryMessage"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Partagez un souvenir, une anecdote... (optionnel)"
+            placeholder={t.yourMessagePlaceholder}
             rows="4"
             disabled={isUploading}
             className="bg-background"
@@ -339,7 +339,7 @@ const MemoryForm = ({ t }) => {
         <div>
           <Label className="flex items-center mb-3 text-sm font-medium text-foreground">
             <Files className="w-4 h-4 mr-2 text-primary" />
-            Fichiers ({files.length}/10)
+            {t.files} ({files.length}/10)
           </Label>
           
           <input
@@ -362,10 +362,10 @@ const MemoryForm = ({ t }) => {
           >
             <div className="text-center">
               <p className="text-sm text-primary/70 font-medium">
-                {files.length >= 10 ? 'Maximum atteint' : 'Sélectionner des fichiers'}
+                {files.length >= 10 ? t.maxReached : t.selectFiles}
               </p>
               <p className="text-xs text-muted-foreground mt-1">
-                Images, vidéos, audio (max 100 Mo chacun)
+                {t.fileTypes}
               </p>
             </div>
           </Button>
@@ -375,7 +375,7 @@ const MemoryForm = ({ t }) => {
         {files.length > 0 && (
           <div className="space-y-3">
             <Label className="text-sm font-medium text-foreground">
-              Fichiers sélectionnés :
+              {t.selectedFiles}
             </Label>
             <div className="space-y-2 max-h-60 overflow-y-auto">
               {files.map((file, index) => (
@@ -390,26 +390,28 @@ const MemoryForm = ({ t }) => {
         )}
 
         {/* Bouton de soumission */}
-        <Button 
-          type="submit" 
-          disabled={isUploading || !name.trim()}
-          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group h-12"
-        >
-          {isUploading ? (
-            <>
-              <div className="w-4 h-4 mr-2 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-              Upload en cours...
-            </>
-          ) : (
-            <>
-              Partager le souvenir 
-              <Send className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-            </>
-          )}
-        </Button>
+        <div className="py-2">
+          <Button 
+            type="submit" 
+            disabled={isUploading || !name.trim()}
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group h-12"
+          >
+            {isUploading ? (
+              <>
+                <div className="w-4 h-4 mr-2 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                {t.sharing}
+              </>
+            ) : (
+              <>
+                <Send className="w-4 h-4 mr-2 transition-transform group-hover:translate-x-1" />
+                {t.shareMemory}
+              </>
+            )}
+          </Button>
+        </div>
 
         <p className="text-xs text-muted-foreground text-center mt-4">
-          Vos souvenirs seront conservés privés et accessibles uniquement aux mariés.
+          {t.privacyNote}
         </p>
       </form>
     </div>

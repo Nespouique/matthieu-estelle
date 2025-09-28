@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { User, AtSign, Users, CalendarCheck, WheatOff, Send, Plus, Minus, Loader2, CheckCircle } from "lucide-react";
+import { User, AtSign, CalendarCheck, WheatOff, Send, Loader2, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,60 +7,6 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext.jsx";
 import { translations } from "@/lib/translations";
-
-// Number Input Component
-const NumberInput = ({ value, onChange, min = 1, max = 10, t }) => {
-  const handleDecrease = () => {
-    if (value > min) {
-      onChange(value - 1);
-    }
-  };
-
-  const handleIncrease = () => {
-    if (value < max) {
-      onChange(value + 1);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const newValue = parseInt(e.target.value) || min;
-    if (newValue >= min && newValue <= max) {
-      onChange(newValue);
-    }
-  };
-
-  return (
-    <div className="flex items-center border border-input rounded-md bg-background">
-      <button
-        type="button"
-        onClick={handleDecrease}
-        disabled={value <= min}
-        className="flex items-center justify-center w-10 h-10 text-foreground hover:bg-primary/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-l-md"
-      >
-        <Minus className="w-4 h-4" />
-      </button>
-      <input
-        type="number"
-        value={value}
-        onChange={handleInputChange}
-        min={min}
-        max={max}
-        className="w-16 h-10 text-center border-0 bg-transparent text-foreground focus:outline-none focus:ring-0"
-      />
-      <button
-        type="button"
-        onClick={handleIncrease}
-        disabled={value >= max}
-        className="flex items-center justify-center w-10 h-10 text-foreground hover:bg-primary/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-r-md"
-      >
-        <Plus className="w-4 h-4" />
-      </button>
-      <div className="px-3 text-sm text-foreground/70">
-        {value === 1 ? t.rsvpForm.person : t.rsvpForm.people}
-      </div>
-    </div>
-  );
-};
 
 const RSVP = () => {
   const { language } = useLanguage();
@@ -73,7 +19,6 @@ const RSVP = () => {
   // Form state
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [attendanceEvents, setAttendanceEvents] = useState([]);
   const [cannotAttend, setCannotAttend] = useState(false);
   const [dietaryRestrictions, setDietaryRestrictions] = useState("");
@@ -84,10 +29,10 @@ const RSVP = () => {
 
   // Attendance events options
   const eventOptions = [
-    { id: 'mairie', label: t.rsvpForm.eventMairie, date: t.rsvpForm.dateJuly25 },
-    { id: 'cocktail', label: t.rsvpForm.eventCocktail, date: t.rsvpForm.dateJuly25 },
-    { id: 'ceremony', label: t.rsvpForm.eventCeremony, date: t.rsvpForm.dateJuly26 },
-    { id: 'brunch', label: t.rsvpForm.eventBrunch, date: t.rsvpForm.dateJuly27 },
+    { id: 'mairie', label: t.rsvpForm.eventMairie, date: t.rsvpForm.dateJuly23 },
+    { id: 'cocktail', label: t.rsvpForm.eventCocktail, date: t.rsvpForm.dateJuly23 },
+    { id: 'ceremony', label: t.rsvpForm.eventCeremony, date: t.rsvpForm.dateJuly25 },
+    { id: 'brunch', label: t.rsvpForm.eventBrunch, date: t.rsvpForm.dateJuly26 },
   ];
 
   // Handle checkbox changes for events
@@ -119,7 +64,6 @@ const RSVP = () => {
   const isFormValid = () => {
     return fullName.trim() && 
            email.trim() && 
-           numberOfGuests >= 1 && 
            (attendanceEvents.length > 0 || cannotAttend);
   };
 
@@ -135,7 +79,6 @@ const RSVP = () => {
       const params = new URLSearchParams({
         fullName: fullName.trim(),
         email: email.trim(),
-        guestsCount: numberOfGuests.toString(),
         attendance: cannotAttend ? 'cannotAttend' : attendanceEvents.join(', '),
         diet: dietaryRestrictions.trim()
       });
@@ -180,7 +123,6 @@ const RSVP = () => {
         setTimeout(() => {
           setFullName("");
           setEmail("");
-          setNumberOfGuests(1);
           setAttendanceEvents([]);
           setCannotAttend(false);
           setDietaryRestrictions("");
@@ -259,21 +201,6 @@ const RSVP = () => {
               />
             </div>
 
-            {/* Nombre de personnes */}
-            <div>
-              <Label className="flex items-center mb-2">
-                <Users className="w-4 h-4 mr-2 text-primary" /> 
-                {t.rsvpForm.numberOfGuests} *
-              </Label>
-              <NumberInput 
-                value={numberOfGuests}
-                onChange={setNumberOfGuests}
-                min={1}
-                max={20}
-                t={t}
-              />
-            </div>
-
             {/* Serez-vous des nôtres ? */}
             <div>
               <Label className="flex items-center mb-4">
@@ -300,7 +227,7 @@ const RSVP = () => {
                       }`}
                     >
                       <span className="font-semibold">{event.label}</span>
-                      <span className="text-foreground/60 ml-2">({event.date})</span>
+                      <span className="text-foreground/60 text-xs ml-2">({event.date})</span>
                     </Label>
                   </div>
                 ))}
@@ -346,7 +273,7 @@ const RSVP = () => {
             </div>
 
             {/* Submit Button */}
-            <div className="text-center pt-4">
+            <div className="text-center py-2">
               <Button 
                 type="submit" 
                 size="lg" 

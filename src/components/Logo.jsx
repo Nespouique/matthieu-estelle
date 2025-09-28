@@ -10,6 +10,9 @@ const Logo = ({ enableConfetti = false }) => {
   const triggerConfetti = (e) => {
     e.preventDefault();
     
+    // Détecter si on est sur mobile
+    const isMobile = window.innerWidth < 768;
+    
     // Explosion de confettis au centre
     confetti({
       particleCount: 100,
@@ -17,20 +20,37 @@ const Logo = ({ enableConfetti = false }) => {
       origin: { y: 0.6 }
     });
 
-    // Série d'explosions latérales
+    // Série d'explosions latérales ou du bas selon l'écran
     setTimeout(() => {
-      confetti({
-        particleCount: 50,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0 }
-      });
-      confetti({
-        particleCount: 50,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1 }
-      });
+      if (isMobile) {
+        // Sur mobile : confettis du bas vers le haut
+        confetti({
+          particleCount: 50,
+          angle: 75,
+          spread: 55,
+          origin: { x: 0.3, y: 1 }
+        });
+        confetti({
+          particleCount: 50,
+          angle: 105,
+          spread: 55,
+          origin: { x: 0.7, y: 1 }
+        });
+      } else {
+        // Sur desktop : confettis des côtés
+        confetti({
+          particleCount: 50,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 50,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
+      }
     }, 150);
 
     // Explosion finale avec des couleurs de mariage (or, blanc, rose)

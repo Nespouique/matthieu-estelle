@@ -8,7 +8,7 @@ export const venueFr = {
   },
 
   venues: {
-    title: "Nos Lieux de Célébration",
+    title: "Lieux de Célébration",
     townHall: {
       name: "Mairie de Houilles",
       address: "16 Rue Gambetta, 78800 Houilles",

@@ -29,7 +29,7 @@ const DressCode = () => {
               >
                 <div className="flex items-center">
                   <HelpCircle className="w-6 h-6 text-primary mr-3 flex-shrink-0" />
-                  <h3 className="text-lg font-serif text-primary">{faq.question}</h3>
+                  <h3 className="text-lg text-primary">{faq.question}</h3>
                 </div>
                 {openFaq === index ? (
                   <ChevronUp className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
@@ -56,7 +56,7 @@ const DressCode = () => {
                                 href="https://trea.tw/5985HD" 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="text-primary hover:underline font-medium"
+                                className="text-primary underline hover:no-underline font-medium"
                               >
                                 Treatwell
                               </a>

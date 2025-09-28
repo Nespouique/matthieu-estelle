@@ -16,4 +16,22 @@ export const memoriesEn = {
   audioRecorded: "Audio recorded",
   microphoneError: "Microphone access error",
   microphoneErrorDesc: "Unable to access microphone. Please check permissions.",
+  // New field labels
+  yourName: "Your name *",
+  yourNamePlaceholder: "Your name...",
+  yourMessage: "Your message / Anecdote",
+  yourMessagePlaceholder: "Share a memory, an anecdote... (optional)",
+  files: "Files",
+  selectFiles: "Select files",
+  maxReached: "Maximum reached",
+  fileTypes: "Images, videos, audio (max 100 MB each)",
+  selectedFiles: "Selected files:",
+  sharing: "Sharing...",
+  shareMemory: "Share memory",
+  // Audio recorder labels
+  startRecorderButton: "Start recording",
+  recordingStatus: "Recording...",
+  audioRecordedStatus: "Audio recorded",
+  // Privacy note
+  privacyNote: "Your memories will be kept private and accessible only to the bride and groom."
 };

@@ -8,7 +8,7 @@ export const venueEn = {
   },
 
   venues: {
-    title: "Our Wedding Venues",
+    title: "Wedding Venues",
     townHall: {
       name: "Houilles Town Hall",
       address: "16 Rue Gambetta, 78800 Houilles",
