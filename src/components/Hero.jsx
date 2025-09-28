@@ -14,17 +14,20 @@ const Hero = () => {
   const images = [
     { 
       id: 'carousel1', 
-      src: '/images/carousel1.png',
+      srcDesktop: '/images/carousel1_desktop.png',
+      srcMobile: '/images/carousel1_mobile.png',
       description: 'Estelle et Matthieu - Photo de mariage 1'
     },
     { 
       id: 'carousel2', 
-      src: '/images/carousel2.png',
+      srcDesktop: '/images/carousel2_desktop.png',
+      srcMobile: '/images/carousel2_mobile.png',
       description: 'Estelle et Matthieu - Photo de mariage 2'
     },
     { 
       id: 'carousel3', 
-      src: '/images/carousel3.png',
+      srcDesktop: '/images/carousel3_desktop.png',
+      srcMobile: '/images/carousel3_mobile.png',
       description: 'Estelle et Matthieu - Photo de mariage 3'
     },
   ];
@@ -53,10 +56,17 @@ const Hero = () => {
   return (
     <section id="hero" className="relative h-[calc(100vh-4rem)] flex items-center justify-center text-center text-white overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <img 
-          alt={images[currentImageIndex].description}
-          className="w-full h-full object-cover"
-          src={images[currentImageIndex].src} />
+        <picture>
+          <source 
+            media="(min-width: 768px)" 
+            srcSet={images[currentImageIndex].srcDesktop}
+          />
+          <img 
+            alt={images[currentImageIndex].description}
+            className="w-full h-full object-cover"
+            src={images[currentImageIndex].srcMobile}
+          />
+        </picture>
         <div className="absolute inset-0 bg-black/50"></div>
       </div>
 
