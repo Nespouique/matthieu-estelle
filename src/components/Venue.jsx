@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Plane, Book, ChevronDown, ChevronUp, School, Home as HomeIcon, Castle, Hotel } from 'lucide-react';
+import { MapPin, Book, ChevronDown, ChevronUp, School, Home as HomeIcon, Castle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext.jsx';
 import { translations } from '@/lib/translations';
 
 const Venue = () => {
   const { language } = useLanguage();
   const t = translations[language].venue;
-  const [isTravelInfoOpen, setIsTravelInfoOpen] = useState(false);
   const [isVenuesOpen, setIsVenuesOpen] = useState(false);
-  const [isAccommodationOpen, setIsAccommodationOpen] = useState(false);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [userHasInteracted, setUserHasInteracted] = useState(false);
 
@@ -17,14 +15,10 @@ const Venue = () => {
     const checkScreenSize = () => {
       if (!userHasInteracted) {
         if (window.innerWidth >= 768) { // md breakpoint
-          setIsTravelInfoOpen(true);
           setIsVenuesOpen(true);
-          setIsAccommodationOpen(true);
           setIsGuideOpen(true);
         } else {
-          setIsTravelInfoOpen(false);
           setIsVenuesOpen(false);
-          setIsAccommodationOpen(false);
           setIsGuideOpen(false);
         }
       }
@@ -36,19 +30,9 @@ const Venue = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, [userHasInteracted]);
 
-  const toggleTravelInfo = () => {
-    setUserHasInteracted(true);
-    setIsTravelInfoOpen(!isTravelInfoOpen);
-  };
-
   const toggleVenues = () => {
     setUserHasInteracted(true);
     setIsVenuesOpen(!isVenuesOpen);
-  };
-
-  const toggleAccommodation = () => {
-    setUserHasInteracted(true);
-    setIsAccommodationOpen(!isAccommodationOpen);
   };
 
   const toggleGuide = () => {
@@ -97,46 +81,13 @@ const Venue = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start mb-12">
-          <div className="relative">
+        <div className="mb-12">
+          <div className="relative max-w-6xl mx-auto">
             <div className="rounded-xl overflow-hidden shadow-2xl">
               <img
                 alt="Domaine de Chaalis"
-                className="w-full h-auto object-cover aspect-[4/3] transform transition-transform duration-500 hover:scale-105"
+                className="w-full h-auto object-cover aspect-[21/9] transform transition-transform duration-500 hover:scale-105"
                 src="/images/Chaalis.jpg" />
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <div className="p-6 bg-background rounded-xl shadow-lg border border-secondary/10">
-              <button
-                onClick={toggleTravelInfo}
-                className="flex items-center justify-between w-full text-left"
-              >
-                <div className="flex items-center">
-                  <Plane className="w-7 h-7 text-primary mr-3" />
-                  <h3 className="text-xl text-primary font-semibold">{t.travelInfo.title}</h3>
-                </div>
-                {isTravelInfoOpen ? (
-                  <ChevronUp className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
-                )}
-              </button>
-              
-              <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  isTravelInfoOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-                }`}
-              >
-                <div className="pt-4">
-                  {t.travelInfo.description.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="text-sm text-foreground/80 leading-relaxed mb-4 last:mb-0">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -239,45 +190,6 @@ const Venue = () => {
                 </div>
                 );
               })}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Section hébergements */}
-        <div className="mb-12">
-          <div className="p-6 bg-background rounded-xl shadow-lg border border-secondary/10">
-            <button
-              onClick={toggleAccommodation}
-              className="flex items-center justify-between w-full text-left"
-            >
-              <div className="flex items-center">
-                <Hotel className="w-7 h-7 text-primary mr-3" />
-                <h3 className="text-xl text-primary font-semibold">{t.accommodation.title}</h3>
-              </div>
-              {isAccommodationOpen ? (
-                <ChevronUp className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-primary transition-transform duration-200 flex-shrink-0" />
-              )}
-            </button>
-            
-            <div
-              className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                isAccommodationOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-              }`}
-            >
-              <div className="pt-4">
-                <p className="text-sm text-foreground/80 mb-6">{t.accommodation.description}</p>
-                <div className="grid md:grid-cols-3 gap-4">
-                  {t.accommodation.options.map((option, index) => (
-                <div key={index} className="p-4 bg-secondary/25 rounded-lg border border-secondary/30">
-                  <h4 className="text-md text-foreground/80 mb-2 flex items-center">{option.name}</h4>
-                  <p className="text-secondary mb-2 text-sm hover:text-primary transition-colors block underline">{option.address}</p>
-                  <p className="text-foreground/70 mb-2 text-sm">{option.price}</p>
-                </div>
-              ))}
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 export const venueEn = {
   venueTitle: "Logistics",
-  introText: "Here you'll find all the essential information about travel, accommodation, and our wedding venues, so you can plan your stay with ease.",
+  introText: "Here you'll find all the essential information about travel, and our wedding venues, so you can plan your stay with ease.",
   
   travelInfo: {
     title: "Arriving in France",

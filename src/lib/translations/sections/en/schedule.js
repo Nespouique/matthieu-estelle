@@ -19,13 +19,5 @@ export const scheduleEn = {
       "9:00 PM - Dinner",
       "11:00 PM - Dancing party"
     ]
-  },
-  returnBrunch: {
-    date: "Sunday July 26, 2026",
-    title: "Return",
-    location: "Domaine de Chaalis",
-    times: [
-      "12:00 PM - Brunch at Domaine de Chaalis"
-    ]
   }
 };

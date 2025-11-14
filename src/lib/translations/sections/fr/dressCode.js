@@ -3,7 +3,7 @@ export const dressCodeFr = {
   faqs: [
     {
       question: "Quel est le dress code ?",
-      answer: "• Pour le jeudi 23 et le dimanche 26 juillet : tenue de cocktail\n\n• Pour le samedi 25 juillet : tenue formelle\n\nP.S. Réservez le blanc à la mariée."
+      answer: "• Pour le jeudi 23 : cocktail attire\n\n• Pour le samedi 25 juillet : formel"
     },
     {
       question: "Pouvons-nous venir avec des enfants ?",

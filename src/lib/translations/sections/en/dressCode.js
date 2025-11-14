@@ -3,7 +3,7 @@ export const dressCodeEn = {
   faqs: [
     {
       question: "What is the dress code?",
-      answer: "• For Thursday July 23rd and Sunday July 26th: cocktail attire\n\n• For Saturday July 25th: formal\n\n• P.S. Please leave white for the bride."
+      answer: "• For Thursday July 23rd: cocktail attire\n\n• For Saturday July 25th: formal"
     },
     {
       question: "Can we come with children?",

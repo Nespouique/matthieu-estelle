@@ -5,42 +5,42 @@
 
 @layer base {
   :root {
-    /* Couleurs principales basées sur la nouvelle palette */
-    --background: 35 3% 96%;
-    --foreground: 59 23% 45%;
+    /* Couleurs principales basées sur la nouvelle palette verte */
+    --background: 0 0% 98%;
+    --foreground: 123 30% 25%;
     
     /* Cards avec un fond légèrement plus foncé que le background */
-    --card: 35 5% 94%;
-    --card-foreground: 59 23% 45%;
+    --card: 0 0% 96%;
+    --card-foreground: 123 30% 25%;
     
     /* Popovers */
-    --popover: 35 3% 96%;
-    --popover-foreground: 59 23% 45%;
+    --popover: 0 0% 98%;
+    --popover-foreground: 123 30% 25%;
     
-    /* Couleur primaire dérivée du text primary avec plus de saturation */
-    --primary: 59 35% 40%;
-    --primary-foreground: 35 3% 96%;
+    /* Couleur primaire - vert foncé #316834 */
+    --primary: 123 37% 30%;
+    --primary-foreground: 0 0% 98%;
     
-    /* Couleur secondaire complémentaire */
-    --secondary: 35 20% 70%;
-    --secondary-foreground: 59 23% 45%;
+    /* Couleur secondaire complémentaire - vert plus clair */
+    --secondary: 123 25% 65%;
+    --secondary-foreground: 123 30% 25%;
     
     /* Couleurs atténuées */
-    --muted: 35 8% 88%;
-    --muted-foreground: 59 15% 60%;
+    --muted: 123 10% 90%;
+    --muted-foreground: 123 15% 50%;
     
-    /* Accent similaire au primary mais plus clair */
-    --accent: 59 25% 50%;
-    --accent-foreground: 35 3% 96%;
+    /* Accent - vert intermédiaire */
+    --accent: 123 35% 40%;
+    --accent-foreground: 0 0% 98%;
     
     /* Couleur destructive (rouge) */
     --destructive: 0 70% 55%;
-    --destructive-foreground: 35 3% 96%;
+    --destructive-foreground: 0 0% 98%;
     
     /* Bordures et inputs */
-    --border: 35 8% 85%;
-    --input: 35 8% 90%;
-    --ring: 59 35% 40%;
+    --border: 123 10% 85%;
+    --input: 123 8% 92%;
+    --ring: 123 37% 30%;
     
     --radius: 0.5rem;
   }

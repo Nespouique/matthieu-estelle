@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, GlassWater, Coffee } from 'lucide-react';
+import { BookOpenText, Martini } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext.jsx';
 import { translations } from '@/lib/translations';
 
@@ -13,21 +13,14 @@ const Schedule = () => {
       title: t.civilMarriage.title,
       location: t.civilMarriage.location,
       times: t.civilMarriage.times,
-      icon: <Clock className="w-6 h-6 text-primary" />
+      icon: <BookOpenText className="w-6 h-6 text-primary" />
     },
     {
       date: t.laicCeremony.date,
       title: t.laicCeremony.title,
       location: t.laicCeremony.location,
       times: t.laicCeremony.times,
-      icon: <GlassWater className="w-6 h-6 text-primary" />
-    },
-    {
-      date: t.returnBrunch.date,
-      title: t.returnBrunch.title,
-      location: t.returnBrunch.location,
-      times: t.returnBrunch.times,
-      icon: <Coffee className="w-6 h-6 text-primary" />
+      icon: <Martini className="w-6 h-6 text-primary" />
     }
   ];
 

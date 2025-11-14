@@ -1,6 +1,6 @@
 export const venueFr = {
   venueTitle: "Logistique",
-  introText: "Vous trouverez ici toutes les informations essentielles sur le voyage, l'hébergement et nos lieux de célébration, afin de préparer votre séjour en toute sérénité.",
+  introText: "Vous trouverez ici toutes les informations essentielles sur le voyage et nos lieux de célébration, afin de préparer votre séjour en toute sérénité.",
   
   travelInfo: {
     title: "Arrivée en France",

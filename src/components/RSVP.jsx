@@ -32,7 +32,6 @@ const RSVP = () => {
     { id: 'mairie', label: t.rsvpForm.eventMairie, date: t.rsvpForm.dateJuly23 },
     { id: 'cocktail', label: t.rsvpForm.eventCocktail, date: t.rsvpForm.dateJuly23 },
     { id: 'ceremony', label: t.rsvpForm.eventCeremony, date: t.rsvpForm.dateJuly25 },
-    { id: 'brunch', label: t.rsvpForm.eventBrunch, date: t.rsvpForm.dateJuly26 },
   ];
 
   // Handle checkbox changes for events
@@ -82,7 +81,6 @@ const RSVP = () => {
         presenceMairie: attendanceEvents.includes('mairie') ? 'O' : 'N',
         presenceCocktail: attendanceEvents.includes('cocktail') ? 'O' : 'N',
         presenceCeremonie: attendanceEvents.includes('ceremony') ? 'O' : 'N',
-        presenceBrunch: attendanceEvents.includes('brunch') ? 'O' : 'N',
         absence: cannotAttend ? 'O' : 'N',
         diet: dietaryRestrictions.trim()
       });

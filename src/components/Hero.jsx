@@ -72,9 +72,11 @@ const Hero = () => {
 
       <div className="relative z-10 p-4 md:p-8">
         <div className="mb-6">
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold">
-            {commonT.estelle} <span className="text-primary">&</span> {commonT.matthieu}
-          </h1>
+          <img 
+            src="/images/Title_logo.png" 
+            alt="Estelle & Matthieu"
+            className="w-full max-w-md md:max-w-xl lg:max-w-2xl mx-auto"
+          />
         </div>
 
         <div className="text-lg md:text-xl lg:text-2xl mb-8 font-light">
