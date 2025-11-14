@@ -8,6 +8,7 @@ const Venue = () => {
   const t = translations[language].venue;
   const [isVenuesOpen, setIsVenuesOpen] = useState(false);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [isOtherPlacesOpen, setIsOtherPlacesOpen] = useState(false);
   const [userHasInteracted, setUserHasInteracted] = useState(false);
 
   // Ouvrir tous les accordéons par défaut sur desktop seulement si l'utilisateur n'a pas encore interagi
@@ -17,9 +18,11 @@ const Venue = () => {
         if (window.innerWidth >= 768) { // md breakpoint
           setIsVenuesOpen(true);
           setIsGuideOpen(true);
+          // isOtherPlacesOpen reste à false par défaut
         } else {
           setIsVenuesOpen(false);
           setIsGuideOpen(false);
+          setIsOtherPlacesOpen(false);
         }
       }
     };
@@ -38,6 +41,11 @@ const Venue = () => {
   const toggleGuide = () => {
     setUserHasInteracted(true);
     setIsGuideOpen(!isGuideOpen);
+  };
+
+  const toggleOtherPlaces = () => {
+    setUserHasInteracted(true);
+    setIsOtherPlacesOpen(!isOtherPlacesOpen);
   };
 
   const venues = [
@@ -120,7 +128,7 @@ const Venue = () => {
                   {venues.map((venue, index) => {
                     const IconComponent = venue.icon;
                     return (
-                  <div key={index} className="p-4 bg-secondary/25 rounded-lg border border-secondary/30">
+                  <div key={index} className="p-4 bg-secondary/15 rounded-lg border border-secondary/20">
                     <h4 className="text-md text-foreground/80 mb-2 flex items-center">
                       <IconComponent className="w-5 h-5 text-foreground/80 mr-2" />
                       {venue.name}
@@ -227,20 +235,18 @@ const Venue = () => {
                     </p>
                   ))}
             </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              {t.ourGuide.places.map((place, index) => (
-                <div key={index} className="p-4 bg-secondary/25 rounded-lg border border-secondary/30">
+            {/* Lieux avec photos en grille */}
+            <div className="grid md:grid-cols-3 gap-6 mb-6">
+              {t.ourGuide.places.filter(place => place.image).map((place, index) => (
+                <div key={index} className="p-4 bg-secondary/15 rounded-lg border border-secondary/20">
                   <h4 className="text-md text-foreground/80 mb-3">{place.name}</h4>
-                  {/* Image du lieu */}
-                  {place.image && (
-                    <div className="mb-4 rounded-lg overflow-hidden">
-                      <img 
-                        src={place.image} 
-                        alt={place.venue}
-                        className="w-full h-40 object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  )}
+                  <div className="mb-4 rounded-lg overflow-hidden">
+                    <img 
+                      src={place.image} 
+                      alt={place.venue}
+                      className="w-full h-56 object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                   <h5 className="text-sm font-semibold text-foreground mb-1">{place.venue}</h5>
                   <a 
                     href={place.mapsLink} 
@@ -252,7 +258,46 @@ const Venue = () => {
                   </a>
                 </div>
               ))}
+            </div>
+
+            {/* Lieux sans photos en liste collapsible */}
+            {t.ourGuide.places.filter(place => !place.image).length > 0 && (
+              <div className="p-6 bg-secondary/15 rounded-lg border border-secondary/20">
+                <button
+                  onClick={toggleOtherPlaces}
+                  className="flex items-center justify-between w-full text-left"
+                >
+                  <h4 className="text-lg text-foreground/80 font-semibold">{t.ourGuide.otherRecommendations}</h4>
+                  {isOtherPlacesOpen ? (
+                    <ChevronUp className="w-5 h-5 text-foreground/80 transition-transform duration-200 flex-shrink-0" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5 text-foreground/80 transition-transform duration-200 flex-shrink-0" />
+                  )}
+                </button>
+                
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    isOtherPlacesOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="pt-4 grid md:grid-cols-2 gap-4">
+                    {t.ourGuide.places.filter(place => !place.image).map((place, index) => (
+                      <div key={index} className="flex flex-col">
+                        <h5 className="text-sm font-semibold text-foreground mb-1">{place.venue}</h5>
+                        <a 
+                          href={place.mapsLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-secondary text-xs hover:text-primary transition-colors underline"
+                        >
+                          {place.address}
+                        </a>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              </div>
+            )}
               </div>
             </div>
           </div>

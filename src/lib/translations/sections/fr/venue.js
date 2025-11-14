@@ -83,6 +83,7 @@ export const venueFr = {
   ourGuide: {
     title: "Notre Guide",
     description: "Nous avons rassemblé une sélection de nos endroits et activités préférés pour vous aider à profiter pleinement de votre séjour. \n\nDes cafés et restaurants charmants aux promenades pittoresques et lieux cachés, ce sont des endroits et expériences que nous aimons particulièrement. \n\nNous espérons qu'ils rendront votre visite encore plus agréable et vous permettront de découvrir ce que nous apprécions au quotidien.",
+    otherRecommendations: "Autres Recommandations",
     places: [
       {
         name: "Notre première rencontre",
@@ -104,6 +105,143 @@ export const venueFr = {
         address: "Rue du Connétable, 60500 Chantilly",
         mapsLink: "https://maps.app.goo.gl/VJ1ZZfsG9h4CPpJF7",
         image: "/images/ChateauChantilly.jpg"
+      },
+      {
+        name: "Restaurant",
+        venue: "Au Pied de Cochon",
+        address: "6 Rue Coquillière, 75001 Paris",
+        mapsLink: "https://maps.app.goo.gl/rCUuoERztSkdY94b9",
+        image: "/images/AuPiedDeCochon.jpg"
+      },
+      {
+        name: "Activité",
+        venue: "Jardin des Tuileries",
+        address: "Pl. de la Concorde, 75001 Paris",
+        mapsLink: "https://maps.app.goo.gl/HoTpMAjH3rT8ryBJ8",
+        image: "/images/Tuileries.jpg"
+      },
+      {
+        name: "Activité",
+        venue: "Caves de Champagne",
+        address: "Reims",
+        mapsLink: "https://maps.app.goo.gl/KHot2a3bXj9qKWtLA",
+        image: "/images/CavesChampagne.jpg"
+      },
+      {
+        name: "Activité",
+        venue: "Deauville / Honfleur",
+        address: "Deauville",
+        mapsLink: "https://maps.app.goo.gl/Mj5RyiRfURpisBVo7",
+        image: "/images/Deauville.jpg"
+      },
+      {
+        name: "Activité",
+        venue: "Étretat",
+        address: "Étretat",
+        mapsLink: "https://maps.app.goo.gl/jeSymJUCex325rAQ6",
+        image: "/images/Etretat.jpg"
+      },
+      {
+        name: "Restaurant",
+        venue: "Bouillon République",
+        address: "39 Bd du Temple, 75003 Paris",
+        mapsLink: "https://maps.app.goo.gl/pfhRPwxry839KYUk6"
+      },
+      {
+        name: "Restaurant",
+        venue: "Accents",
+        address: "24 Rue Feydeau, 75002 Paris",
+        mapsLink: "https://maps.app.goo.gl/Lj56EqSA1bXrzgjN9"
+      },
+      {
+        name: "Restaurant",
+        venue: "Komé Komé",
+        address: "13 Rue de Bourg Tibourg, 75004 Paris",
+        mapsLink: "https://maps.app.goo.gl/pHPQgsj1TpxeiPAf8"
+      },
+      {
+        name: "Restaurant",
+        venue: "Bonjour Jacob",
+        address: "50 Rue Jacob, 75006 Paris",
+        mapsLink: "https://maps.app.goo.gl/MmkXR76D8Ma3Zi1Z6"
+      },
+      {
+        name: "Restaurant",
+        venue: "Paperboy",
+        address: "151 Rue du Faubourg Saint-Martin, 75010 Paris",
+        mapsLink: "https://maps.app.goo.gl/mecMhUvjCy1dLKdL6"
+      },
+      {
+        name: "Restaurant",
+        venue: "Adela",
+        address: "23 Rue de la Fontaine au Roi, 75011 Paris",
+        mapsLink: "https://maps.app.goo.gl/DAiFbRte7g8x7wpt9"
+      },
+      {
+        name: "Restaurant",
+        venue: "Delhi Bazaar",
+        address: "91 Passage Brady, 75010 Paris",
+        mapsLink: "https://maps.app.goo.gl/8Gss3G43XpPQPXPy9"
+      },
+      {
+        name: "Restaurant",
+        venue: "Il était un burger...",
+        address: "29 Rue de Turbigo, 75002 Paris",
+        mapsLink: "https://maps.app.goo.gl/2o8QvJGCbeXbjJ6d9"
+      },
+      {
+        name: "Restaurant",
+        venue: "Dans le Noir",
+        address: "51 Rue Quincampoix, 75004 Paris",
+        mapsLink: "https://maps.app.goo.gl/GkApss8fNSo5ekVr8"
+      },
+      {
+        name: "Soirée",
+        venue: "Le Caveau de la Huchette",
+        address: "5 Rue de la Huchette, 75005 Paris",
+        mapsLink: "https://maps.app.goo.gl/SqwGUMGF6scVBb569"
+      },
+      {
+        name: "Soirée",
+        venue: "Karaoké China Town Belleville",
+        address: "28 Rue de Belleville, 75020 Paris",
+        mapsLink: "https://maps.app.goo.gl/vyTS2Hnr8Cj1Reae9"
+      },
+      {
+        name: "Activité",
+        venue: "Giverny",
+        address: "84 Rue Claude Monet, 27620 Giverny",
+        mapsLink: "https://maps.app.goo.gl/nqcSVjbRCkcSxo28A"
+      },
+      {
+        name: "Activité",
+        venue: "Marché des Enfants Rouges",
+        address: "39 Rue de Bretagne, 75003 Paris",
+        mapsLink: "https://maps.app.goo.gl/qLXCzttzDZ1Fi6iq7"
+      },
+      {
+        name: "Activité",
+        venue: "Cité médiévale de Provins",
+        address: "Provins",
+        mapsLink: "https://maps.app.goo.gl/86HaxpcSWcomUsqDA"
+      },
+      {
+        name: "Activité",
+        venue: "Fontainebleau",
+        address: "Château de Fontainebleau, 77300 Fontainebleau",
+        mapsLink: "https://maps.app.goo.gl/wUW44r1YNkhJWxBH6"
+      },
+      {
+        name: "Activité",
+        venue: "Musée des Arts Forins",
+        address: "53 Av. des Terroirs de France, 75012 Paris",
+        mapsLink: "https://maps.app.goo.gl/gpcTNPHJTRa6a1du8"
+      },
+      {
+        name: "Activité",
+        venue: "Colmar",
+        address: "Colmar",
+        mapsLink: "https://maps.app.goo.gl/ruGwMND3pCYGhZ4F6"
       }
     ]
   },

@@ -93,12 +93,12 @@ const Hero = () => {
           className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12 text-base md:text-lg"
         >
           <div className="flex items-center">
-            <CalendarDays className="w-5 h-5 mr-2 text-primary" />
+            <CalendarDays className="w-5 h-5 mr-2 text-white" />
             <span>{t.date1}</span>
           </div>
           <div className="hidden sm:block w-px h-6 bg-white/50"></div>
           <div className="flex items-center">
-            <CalendarDays className="w-5 h-5 mr-2 text-primary" />
+            <CalendarDays className="w-5 h-5 mr-2 text-white" />
             <span>{t.date2}</span>
           </div>
         </div>
