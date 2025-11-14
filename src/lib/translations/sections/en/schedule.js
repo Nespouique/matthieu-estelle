@@ -11,7 +11,7 @@ export const scheduleEn = {
   },
   laicCeremony: {
     date: "Saturday July 25, 2026",
-    title: "Fiesta",
+    title: "Wedding",
     location: "Domaine de Chaalis",
     times: [
       "6:00 PM - Secular Ceremony",
