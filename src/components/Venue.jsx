@@ -260,18 +260,19 @@ const Venue = () => {
               ))}
             </div>
 
-            {/* Lieux sans photos en liste collapsible */}
+            {/* Lieux sans photos en liste simple */}
             {t.ourGuide.places.filter(place => !place.image).length > 0 && (
-              <div className="p-6 bg-secondary/15 rounded-lg border border-secondary/20">
+              <div className="mt-12">
+                <div className="w-full h-px bg-primary/20 mb-8"></div>
                 <button
                   onClick={toggleOtherPlaces}
-                  className="flex items-center justify-between w-full text-left"
+                  className="flex items-center w-full text-left mb-4"
                 >
-                  <h4 className="text-lg text-foreground/80 font-semibold">{t.ourGuide.otherRecommendations}</h4>
+                  <h4 className="text-lg text-foreground/80 font-semibold mr-2">{t.ourGuide.otherRecommendations}</h4>
                   {isOtherPlacesOpen ? (
-                    <ChevronUp className="w-5 h-5 text-foreground/80 transition-transform duration-200 flex-shrink-0" />
+                    <ChevronUp className="w-5 h-5 text-foreground/80 transition-transform duration-200" />
                   ) : (
-                    <ChevronDown className="w-5 h-5 text-foreground/80 transition-transform duration-200 flex-shrink-0" />
+                    <ChevronDown className="w-5 h-5 text-foreground/80 transition-transform duration-200" />
                   )}
                 </button>
                 
@@ -280,15 +281,15 @@ const Venue = () => {
                     isOtherPlacesOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  <div className="pt-4 grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-x-8 gap-y-3">
                     {t.ourGuide.places.filter(place => !place.image).map((place, index) => (
                       <div key={index} className="flex flex-col">
-                        <h5 className="text-sm font-semibold text-foreground mb-1">{place.venue}</h5>
+                        <span className="text-sm font-medium text-foreground">• {place.venue}</span>
                         <a 
                           href={place.mapsLink} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="text-secondary text-xs hover:text-primary transition-colors underline"
+                          className="text-xs text-secondary hover:text-primary transition-colors underline ml-3"
                         >
                           {place.address}
                         </a>

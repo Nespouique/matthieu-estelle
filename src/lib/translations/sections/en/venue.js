@@ -143,33 +143,9 @@ export const venueEn = {
       },
       {
         name: "Restaurant",
-        venue: "Bouillon République",
-        address: "39 Bd du Temple, 75003 Paris",
-        mapsLink: "https://maps.app.goo.gl/pfhRPwxry839KYUk6"
-      },
-      {
-        name: "Restaurant",
         venue: "Accents",
         address: "24 Rue Feydeau, 75002 Paris",
         mapsLink: "https://maps.app.goo.gl/Lj56EqSA1bXrzgjN9"
-      },
-      {
-        name: "Restaurant",
-        venue: "Komé Komé",
-        address: "13 Rue de Bourg Tibourg, 75004 Paris",
-        mapsLink: "https://maps.app.goo.gl/pHPQgsj1TpxeiPAf8"
-      },
-      {
-        name: "Restaurant",
-        venue: "Bonjour Jacob",
-        address: "50 Rue Jacob, 75006 Paris",
-        mapsLink: "https://maps.app.goo.gl/MmkXR76D8Ma3Zi1Z6"
-      },
-      {
-        name: "Restaurant",
-        venue: "Paperboy",
-        address: "151 Rue du Faubourg Saint-Martin, 75010 Paris",
-        mapsLink: "https://maps.app.goo.gl/mecMhUvjCy1dLKdL6"
       },
       {
         name: "Restaurant",
@@ -179,15 +155,21 @@ export const venueEn = {
       },
       {
         name: "Restaurant",
-        venue: "Delhi Bazaar",
-        address: "91 Passage Brady, 75010 Paris",
-        mapsLink: "https://maps.app.goo.gl/8Gss3G43XpPQPXPy9"
+        venue: "Bonjour Jacob",
+        address: "50 Rue Jacob, 75006 Paris",
+        mapsLink: "https://maps.app.goo.gl/MmkXR76D8Ma3Zi1Z6"
       },
       {
         name: "Restaurant",
-        venue: "Il était un burger...",
-        address: "29 Rue de Turbigo, 75002 Paris",
-        mapsLink: "https://maps.app.goo.gl/2o8QvJGCbeXbjJ6d9"
+        venue: "Bouillon République",
+        address: "39 Bd du Temple, 75003 Paris",
+        mapsLink: "https://maps.app.goo.gl/pfhRPwxry839KYUk6"
+      },
+      {
+        name: "Activity",
+        venue: "Colmar",
+        address: "Colmar",
+        mapsLink: "https://maps.app.goo.gl/ruGwMND3pCYGhZ4F6"
       },
       {
         name: "Restaurant",
@@ -196,10 +178,28 @@ export const venueEn = {
         mapsLink: "https://maps.app.goo.gl/GkApss8fNSo5ekVr8"
       },
       {
-        name: "Night Out",
-        venue: "Le Caveau de la Huchette",
-        address: "5 Rue de la Huchette, 75005 Paris",
-        mapsLink: "https://maps.app.goo.gl/SqwGUMGF6scVBb569"
+        name: "Restaurant",
+        venue: "Delhi Bazaar",
+        address: "91 Passage Brady, 75010 Paris",
+        mapsLink: "https://maps.app.goo.gl/8Gss3G43XpPQPXPy9"
+      },
+      {
+        name: "Activity",
+        venue: "Fontainebleau",
+        address: "Château de Fontainebleau, 77300 Fontainebleau",
+        mapsLink: "https://maps.app.goo.gl/wUW44r1YNkhJWxBH6"
+      },
+      {
+        name: "Activity",
+        venue: "Giverny",
+        address: "84 Rue Claude Monet, 27620 Giverny",
+        mapsLink: "https://maps.app.goo.gl/nqcSVjbRCkcSxo28A"
+      },
+      {
+        name: "Restaurant",
+        venue: "Il était un burger...",
+        address: "29 Rue de Turbigo, 75002 Paris",
+        mapsLink: "https://maps.app.goo.gl/2o8QvJGCbeXbjJ6d9"
       },
       {
         name: "Night Out",
@@ -208,10 +208,16 @@ export const venueEn = {
         mapsLink: "https://maps.app.goo.gl/vyTS2Hnr8Cj1Reae9"
       },
       {
-        name: "Activity",
-        venue: "Giverny",
-        address: "84 Rue Claude Monet, 27620 Giverny",
-        mapsLink: "https://maps.app.goo.gl/nqcSVjbRCkcSxo28A"
+        name: "Restaurant",
+        venue: "Komé Komé",
+        address: "13 Rue de Bourg Tibourg, 75004 Paris",
+        mapsLink: "https://maps.app.goo.gl/pHPQgsj1TpxeiPAf8"
+      },
+      {
+        name: "Night Out",
+        venue: "Le Caveau de la Huchette",
+        address: "5 Rue de la Huchette, 75005 Paris",
+        mapsLink: "https://maps.app.goo.gl/SqwGUMGF6scVBb569"
       },
       {
         name: "Activity",
@@ -227,21 +233,15 @@ export const venueEn = {
       },
       {
         name: "Activity",
-        venue: "Fontainebleau",
-        address: "Château de Fontainebleau, 77300 Fontainebleau",
-        mapsLink: "https://maps.app.goo.gl/wUW44r1YNkhJWxBH6"
-      },
-      {
-        name: "Activity",
-        venue: "Musée des Arts Forins",
+        venue: "Musée des Arts Forains",
         address: "53 Av. des Terroirs de France, 75012 Paris",
         mapsLink: "https://maps.app.goo.gl/gpcTNPHJTRa6a1du8"
       },
       {
-        name: "Activity",
-        venue: "Colmar",
-        address: "Colmar",
-        mapsLink: "https://maps.app.goo.gl/ruGwMND3pCYGhZ4F6"
+        name: "Restaurant",
+        venue: "Paperboy",
+        address: "151 Rue du Faubourg Saint-Martin, 75010 Paris",
+        mapsLink: "https://maps.app.goo.gl/mecMhUvjCy1dLKdL6"
       }
     ]
   },
