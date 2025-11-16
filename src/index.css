@@ -81,4 +81,11 @@
   .section-transition {
     @apply transition-all duration-500 ease-in-out;
   }
+  
+  /* Logo réduit pour les petits écrans en hauteur */
+  @media (max-height: 700px) {
+    .hero-logo-small {
+      max-width: 240px !important;
+    }
+  }
 }

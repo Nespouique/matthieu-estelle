@@ -107,39 +107,46 @@ export const venueEn = {
         image: "/images/ChateauChantilly.jpg"
       },
       {
-        name: "Restaurant",
+        name: "Eat like pigs",
         venue: "Au Pied de Cochon",
         address: "6 Rue Coquillière, 75001 Paris",
         mapsLink: "https://maps.app.goo.gl/rCUuoERztSkdY94b9",
         image: "/images/AuPiedDeCochon.jpg"
       },
       {
-        name: "Activity",
+        name: "Matthieu's photography skills",
         venue: "Tuileries Garden",
         address: "Pl. de la Concorde, 75001 Paris",
         mapsLink: "https://maps.app.goo.gl/HoTpMAjH3rT8ryBJ8",
         image: "/images/Tuileries.jpg"
       },
       {
-        name: "Activity",
+        name: "Underground life",
         venue: "Champagne Cellars",
         address: "Reims",
         mapsLink: "https://maps.app.goo.gl/KHot2a3bXj9qKWtLA",
         image: "/images/CavesChampagne.jpg"
       },
       {
-        name: "Activity",
+        name: "Eat oysters for dessert",
         venue: "Deauville / Honfleur",
         address: "Deauville",
         mapsLink: "https://maps.app.goo.gl/Mj5RyiRfURpisBVo7",
         image: "/images/Deauville.jpg"
       },
       {
-        name: "Activity",
+        name: "Check out places from the geography book",
         venue: "Étretat",
         address: "Étretat",
         mapsLink: "https://maps.app.goo.gl/jeSymJUCex325rAQ6",
         image: "/images/Etretat.jpg"
+      },
+      {
+        name: "Estelle's first snowflakes",
+        venue: "Strasbourg",
+        address: "Strasbourg",
+        mapsLink: "https://maps.app.goo.gl/6cpCxDMusK2vcDi39",
+        image: "/images/Strasbourg.jpg"
       },
       {
         name: "Restaurant",
@@ -166,10 +173,10 @@ export const venueEn = {
         mapsLink: "https://maps.app.goo.gl/pfhRPwxry839KYUk6"
       },
       {
-        name: "Activity",
-        venue: "Colmar",
-        address: "Colmar",
-        mapsLink: "https://maps.app.goo.gl/ruGwMND3pCYGhZ4F6"
+        name: "Restaurant",
+        venue: "Dans le Noir",
+        address: "51 Rue Quincampoix, 75004 Paris",
+        mapsLink: "https://maps.app.goo.gl/GkApss8fNSo5ekVr8"
       },
       {
         name: "Restaurant",

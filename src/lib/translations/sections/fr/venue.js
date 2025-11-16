@@ -107,39 +107,46 @@ export const venueFr = {
         image: "/images/ChateauChantilly.jpg"
       },
       {
-        name: "Restaurant",
+        name: "Mangez comme des cochons",
         venue: "Au Pied de Cochon",
         address: "6 Rue Coquillière, 75001 Paris",
         mapsLink: "https://maps.app.goo.gl/rCUuoERztSkdY94b9",
         image: "/images/AuPiedDeCochon.jpg"
       },
       {
-        name: "Activité",
+        name: "Les talents de photographe de Matthieu",
         venue: "Jardin des Tuileries",
         address: "Pl. de la Concorde, 75001 Paris",
         mapsLink: "https://maps.app.goo.gl/HoTpMAjH3rT8ryBJ8",
         image: "/images/Tuileries.jpg"
       },
       {
-        name: "Activité",
+        name: "Underground life",
         venue: "Caves de Champagne",
         address: "Reims",
         mapsLink: "https://maps.app.goo.gl/KHot2a3bXj9qKWtLA",
         image: "/images/CavesChampagne.jpg"
       },
       {
-        name: "Activité",
+        name: "Mangez des huîtres en dessert",
         venue: "Deauville / Honfleur",
         address: "Deauville",
         mapsLink: "https://maps.app.goo.gl/Mj5RyiRfURpisBVo7",
         image: "/images/Deauville.jpg"
       },
       {
-        name: "Activité",
+        name: "Visitez le livre de géographie",
         venue: "Étretat",
         address: "Étretat",
         mapsLink: "https://maps.app.goo.gl/jeSymJUCex325rAQ6",
         image: "/images/Etretat.jpg"
+      },
+      {
+        name: "Les premiers flocons d'Estelle",
+        venue: "Strasbourg",
+        address: "Strasbourg",
+        mapsLink: "https://maps.app.goo.gl/6cpCxDMusK2vcDi39",
+        image: "/images/Strasbourg.jpg"
       },
       {
         name: "Restaurant",
@@ -172,10 +179,10 @@ export const venueFr = {
         mapsLink: "https://maps.app.goo.gl/86HaxpcSWcomUsqDA"
       },
       {
-        name: "Activité",
-        venue: "Colmar",
-        address: "Colmar",
-        mapsLink: "https://maps.app.goo.gl/ruGwMND3pCYGhZ4F6"
+        name: "Restaurant",
+        venue: "Dans le Noir",
+        address: "51 Rue Quincampoix, 75004 Paris",
+        mapsLink: "https://maps.app.goo.gl/GkApss8fNSo5ekVr8"
       },
       {
         name: "Restaurant",

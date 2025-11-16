@@ -54,7 +54,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative h-[calc(100vh-4rem)] flex items-center justify-center text-center text-white overflow-hidden">
+    <section id="hero" className="relative h-[calc(100vh-4rem)] flex items-start justify-center text-center text-white overflow-hidden">
       <div className="absolute inset-0 z-0">
         <picture>
           <source 
@@ -63,19 +63,19 @@ const Hero = () => {
           />
           <img 
             alt={images[currentImageIndex].description}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
             src={images[currentImageIndex].srcMobile}
           />
         </picture>
         <div className="absolute inset-0 bg-black/50"></div>
       </div>
 
-      <div className="relative z-10 p-4 md:p-8">
-        <div className="mb-6">
+      <div className="relative z-20 p-4 md:p-8 pt-10 md:pt-24">
+        <div className="mb-6 px-4">
           <img 
             src="/images/Title_logo.png" 
             alt="Estelle & Matthieu"
-            className="w-full max-w-md md:max-w-xl lg:max-w-2xl mx-auto"
+            className="w-full hero-logo-small max-w-md md:max-w-xl lg:max-w-2xl mx-auto"
           />
         </div>
 
@@ -110,7 +110,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-0 flex space-x-2">
+      <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 flex space-x-2">
         {images.map((_, index) => (
           <button
             key={index}
