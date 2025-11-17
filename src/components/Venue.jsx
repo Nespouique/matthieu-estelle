@@ -276,12 +276,9 @@ const Venue = () => {
                   )}
                 </button>
                 
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    isOtherPlacesOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-                  }`}
-                >
-                  <div className="grid md:grid-cols-2 gap-x-8 gap-y-3">
+                {isOtherPlacesOpen && (
+                  <div className="animate-in fade-in slide-in-from-top-2 duration-300">
+                    <div className="grid md:grid-cols-2 gap-x-8 gap-y-3">
                     {t.ourGuide.places.filter(place => !place.image).map((place, index) => (
                       <div key={index} className="flex flex-col">
                         <span className="text-sm font-medium text-foreground">• {place.venue}</span>
@@ -295,8 +292,9 @@ const Venue = () => {
                         </a>
                       </div>
                     ))}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             )}
               </div>
