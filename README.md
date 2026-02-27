@@ -119,10 +119,10 @@ docker run -d -p 8080:80 estelle-matthieu-wedding
 docker build -t nespouique/estelle-matthieu-wedding:latest .
 
 # 2. Ajouter un tag de version
-docker tag nespouique/estelle-matthieu-wedding:latest nespouique/estelle-matthieu-wedding:v2.2.0
+docker tag nespouique/estelle-matthieu-wedding:latest nespouique/estelle-matthieu-wedding:v2.2.1
 
 # 3. Publication sur Docker Hub
-docker push nespouique/estelle-matthieu-wedding:v2.2.0
+docker push nespouique/estelle-matthieu-wedding:v2.2.1
 docker push nespouique/estelle-matthieu-wedding:latest
 ```
 
@@ -130,7 +130,7 @@ docker push nespouique/estelle-matthieu-wedding:latest
 
 1. **Lancer Docker Desktop** - S'assurer que Docker est démarré
 2. **Build** - Construire l'image avec le tag latest
-3. **Tag** - Ajouter un tag de version spécifique (ex: v2.2.0)
+3. **Tag** - Ajouter un tag de version spécifique (ex: v2.2.1)
 4. **Push** - Publier les deux versions (latest et versionnée) sur Docker Hub
 
 ## 📦 Mise à jour
