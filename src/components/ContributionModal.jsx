@@ -76,7 +76,7 @@ const ContributionModal = ({ isOpen, onClose, translations }) => {
                   {translations.modal.iban}
                 </div>
                 <button
-                  onClick={() => copyToClipboard('FR76282330000117400183920179', 'iban')}
+                  onClick={() => copyToClipboard('FR7628233000011740018392019', 'iban')}
                   className="flex items-center justify-center w-8 h-8 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors flex-shrink-0"
                 >
                   {copiedIban ? (
