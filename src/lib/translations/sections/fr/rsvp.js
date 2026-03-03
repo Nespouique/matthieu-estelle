@@ -1,6 +1,6 @@
 export const rsvpFr = {
   rsvpTitle: "Confirmez Votre Présence",
-  rsvpDescription: "Nous serions ravis de vous compter parmi nous ! Réponse souhaitée avant le 28 Février 2026.",
+  rsvpDescription: "Nous serions ravis de vous compter parmi nous ! Réponse souhaitée avant le 15 Avril 2026.",
   rsvpForm: {
     fullName: "Prénom et Nom",
     fullNamePlaceholder: "Votre prénom et nom",
